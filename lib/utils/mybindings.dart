@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:get/get.dart';
 import 'package:hikayat/Controllers/MainController.dart';
-
+import 'package:hikayat/Controllers/DataController.dart';
 
 
 class MyBinding extends Bindings {
@@ -16,7 +16,7 @@ class MyBinding extends Bindings {
     // Get.lazyPut(() => GifsController(),fenix:true);
     // Get.lazyPut(() => Quizcontroller(),fenix:true);
     // Get.put<AuthController>(AuthController(), permanent: true);
-    // Get.put<DataController>(DataController(), permanent: true);
+    Get.put<DataController>(DataController(), permanent: true);
 
     // Get.lazyPut(() =>ScrollController());
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:in_app_update/in_app_update.dart';
 import 'package:hikayat/Controllers/MainController.dart';
 
 class MainPage extends StatelessWidget {
@@ -15,8 +15,13 @@ class MainPage extends StatelessWidget {
           appBar: AppBar(
             title: Text("Main Page"),
           ),
-          body: Center(
-            child: Text("Main Page"),
+          drawer: Drawer(),
+          body: ListView.builder(
+            shrinkWrap: true,
+            itemCount: 6,
+            itemBuilder: (BuildContext context, int index) {
+              return const Card(child: Text("hi"),);
+            },
           ),
         );
       },
