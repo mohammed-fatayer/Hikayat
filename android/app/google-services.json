@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "192158253933",
+    "project_id": "hikayat-969a7",
+    "storage_bucket": "hikayat-969a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192158253933:android:7538ed836497f8e4749064",
+        "android_client_info": {
+          "package_name": "com.example.hikayat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "192158253933-1o9cc2cpjidp1i7ukv5jp2gb5c72fn4c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdJD5MJewwk8oRoRjwK88_ybz_IuHLhgs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "192158253933-1o9cc2cpjidp1i7ukv5jp2gb5c72fn4c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
