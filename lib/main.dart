@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Localizations/local.dart';
+import 'package:hikayat/View/GenrePage.dart';
 import 'package:hikayat/theme/theme.dart';
 import 'package:hikayat/utils/mybindings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,6 +55,10 @@ class MyApp extends StatelessWidget {
           GetPage(
             name: "/",
             page: () => MainPage(),
+          ),
+          GetPage(
+            name: "/genre",
+            page: () => GenrePage( stories: Get.arguments,)
           ),
 
     

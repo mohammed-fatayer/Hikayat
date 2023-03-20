@@ -2,22 +2,37 @@ class Category {
   final String title;
   final String discribtion;
   final String imageUrl;
-  List<Story> stories=[];
+  List<Story> stories = [];
 
-  Category({required this.stories,required this.title, required this.discribtion,required this.imageUrl,});
+  Category({
+    required this.stories,
+    required this.title,
+    required this.discribtion,
+    required this.imageUrl,
+  });
 }
 
 class Story {
   final String title;
+  final String writer;
   final String discription;
   final String imageUrl;
-  List<Chapter> chapters=[];
+  final String genre;
+  List<Chapter> chapters = [];
 
-  Story(this.title, this.discription, this.imageUrl);
+  Story(
+      {
+      required this.writer,
+      required this.title,
+      required this.discription,
+      required this.imageUrl,
+      required this.chapters,
+      required this.genre});
 }
+
 class Chapter {
   final String title;
   final String content;
 
-  Chapter(this.title, this.content);
+  Chapter({required this.title, required this.content});
 }
