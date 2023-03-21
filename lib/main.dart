@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Localizations/local.dart';
+import 'package:hikayat/View/ChapterPage.dart';
 import 'package:hikayat/View/GenrePage.dart';
+import 'package:hikayat/View/StoryPage.dart';
+import 'package:hikayat/model/DataClass.dart';
 import 'package:hikayat/theme/theme.dart';
 import 'package:hikayat/utils/mybindings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Localizations/localeController.dart';
 import 'firebase_options.dart';
 import 'View/MainPage.dart';
-
+import 'package:upgrader/upgrader.dart';
 
 
 
@@ -59,6 +62,14 @@ class MyApp extends StatelessWidget {
           GetPage(
             name: "/genre",
             page: () => GenrePage( stories: Get.arguments,)
+          ),
+          GetPage(
+            name: "/story",
+            page: () => StoryPage( chapters: Get.arguments,)
+          ),
+          GetPage(
+            name: "/chapter",
+            page: () => ChapterPage( chapter: Get.arguments,)
           ),
 
     

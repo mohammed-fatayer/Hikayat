@@ -18,7 +18,7 @@ class DataController extends GetxController {
     for (var doc in refcatagories.docs) {
       data.add(Category(
         title: doc.id,
-        discribtion: doc["description"],
+        description: doc["description"],
         imageUrl: doc["image"],
         stories: [],
       ));
@@ -43,5 +43,21 @@ class DataController extends GetxController {
     return data;
   }
 
-  Future fetchChapter() async {}
+
+  fetchChapters(Story story)async {
+   var refchapters=await docRef
+        .doc(story.genre)
+        .collection("stories")
+        .doc(story.title)
+        .collection("chapters")
+        .get();
+         List<Chapter> data = [];
+    for (var doc in refchapters.docs) {
+      data.add(Chapter(
+        title: doc["title"],
+        content: doc["content"],
+      ));
+    }
+    return data;
+  }
 }

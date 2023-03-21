@@ -46,6 +46,7 @@ dependencies:
   cloud_firestore: ^4.4.5
   in_app_update: ^4.0.1
   cached_network_image: ^3.2.3
+  upgrader: ^6.2.0
 
 dev_dependencies:
   flutter_test:

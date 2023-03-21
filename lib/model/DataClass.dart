@@ -1,13 +1,13 @@
 class Category {
   final String title;
-  final String discribtion;
+  final String description;
   final String imageUrl;
   List<Story> stories = [];
 
   Category({
     required this.stories,
     required this.title,
-    required this.discribtion,
+    required this.description,
     required this.imageUrl,
   });
 }
