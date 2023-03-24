@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:hikayat/Controllers/DataController.dart';
 import 'package:hikayat/Controllers/GenreController.dart';
 import 'package:hikayat/model/DataClass.dart';
-import 'package:in_app_update/in_app_update.dart';
 import 'package:hikayat/Controllers/MainController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -22,36 +21,36 @@ class GenrePage extends StatelessWidget {
             title: const Text("genre page"),
           ),
           body: GetBuilder<GenreController>(builder: (context) {
-              return GridView.builder(
-                itemCount: stories.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                itemBuilder: (BuildContext context, int index) {
-                  if (stories == []) {
-                    return const CircularProgressIndicator();
-                  } else {
-                    return Card(
-                      child: InkWell(
-                        onTap: ()async {
-                          var chapters=await dataController.fetchChapters(stories[index]);
-                          Get.toNamed("/story",arguments:chapters);
-                        },
-                        child: SizedBox(
-                          child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: stories[index].imageUrl,
-                            placeholder: (context, url) => const Center(
-                                child: CircularProgressIndicator()),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
-                          ),
+            return GridView.builder(
+              itemCount: stories.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2),
+              itemBuilder: (BuildContext context, int index) {
+                if (stories == []) {
+                  return const CircularProgressIndicator();
+                } else {
+                  return Card(
+                    child: InkWell(
+                      onTap: () async {
+                        var chapters =
+                            await dataController.fetchChapters(stories[index]);
+                        Get.toNamed("/story", arguments: chapters);
+                      },
+                      child: SizedBox(  
+                        child: CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          imageUrl: stories[index].imageUrl,
+                          placeholder: (context, url) =>
+                              const Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
                         ),
                       ),
-                    );
-                  }
-                },
-              );
-          
+                    ),
+                  );
+                }
+              },
+            );
           }),
         );
       },

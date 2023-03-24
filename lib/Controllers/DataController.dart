@@ -7,21 +7,17 @@ class DataController extends GetxController {
 
   final docRef = FirebaseFirestore.instance.collection("Categories");
 
-  @override
-  void onInit() async {
-    super.onInit();
-  }
-
   Future fetchCategories() async {
     QuerySnapshot<Map<String, dynamic>> refcatagories = await docRef.get();
     List<Category> data = [];
     for (var doc in refcatagories.docs) {
       data.add(Category(
-        title: doc.id,
-        description: doc["description"],
-        imageUrl: doc["image"],
-        stories: [],
-      ));
+          title: doc.id,
+          description: doc["description"],
+          imageUrl: doc["image"],
+          stories: [],
+          imageRef: doc["imageRef"],
+          timestamp: doc["timestamp"]));
     }
     categories.value = data;
   }
@@ -38,24 +34,28 @@ class DataController extends GetxController {
         imageUrl: doc["image"],
         chapters: [],
         genre: doc["genre"],
+        timestamp: doc["timestamp"],
+        imageRef: doc["imageRef"],
       ));
     }
     return data;
   }
 
-
-  fetchChapters(Story story)async {
-   var refchapters=await docRef
+  fetchChapters(Story story) async {
+    var refchapters = await docRef
         .doc(story.genre)
         .collection("stories")
         .doc(story.title)
         .collection("chapters")
         .get();
-         List<Chapter> data = [];
+    List<Chapter> data = [];
     for (var doc in refchapters.docs) {
       data.add(Chapter(
         title: doc["title"],
         content: doc["content"],
+        chapterNumber: doc["chapterNumber"],
+        chapterid: doc.id,
+        timestamp: doc["timestamp"],
       ));
     }
     return data;

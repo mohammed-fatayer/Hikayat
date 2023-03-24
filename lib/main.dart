@@ -47,14 +47,6 @@ class MyApp extends StatelessWidget {
         theme: theme == true ? Themes.customDarkTheme : Themes.customLightTheme,
         initialRoute: "/",
         getPages: [
-          // GetPage(
-          //   name: "/",
-          //   page: () => LoginPage(),
-          // ),
-          // GetPage(
-          //   name: "/Register",
-          //   page: () => RegisterPage(),
-          // ),
           GetPage(
             name: "/",
             page: () => MainPage(),
