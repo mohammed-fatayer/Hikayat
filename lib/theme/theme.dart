@@ -2,48 +2,90 @@ import 'package:flutter/material.dart';
 
 class Themes {
   static ThemeData customDarkTheme = ThemeData.dark().copyWith(
-    elevatedButtonTheme: const ElevatedButtonThemeData(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)) ,),
-    inputDecorationTheme: const InputDecorationTheme(
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-        borderSide: BorderSide(color: Colors.grey, width: 2),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        borderSide: BorderSide(color: Colors.green, width: 2),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        borderSide: BorderSide(color: Colors.red, width: 2),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        borderSide: BorderSide(color: Colors.red, width: 2),
-      ),
-    )
-     );
-  static ThemeData customLightTheme = ThemeData.light().copyWith(
-    elevatedButtonTheme: const ElevatedButtonThemeData(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red))  ),
-    inputDecorationTheme: const InputDecorationTheme(
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-        borderSide: BorderSide(color: Colors.grey, width: 2),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        borderSide: BorderSide(color: Colors.green, width: 2),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        borderSide: BorderSide(color: Colors.red, width: 2),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        borderSide: BorderSide(color: Colors.red, width: 2),
-      ),
-    )
-    
-  );
- 
-}
+      primaryColor: Colors.black,
+      canvasColor: Colors.transparent,
+      primaryIconTheme: const IconThemeData(color: Colors.black),
+      textTheme: const TextTheme(
+          headlineSmall: TextStyle(
+              fontFamily: 'Sans',
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontSize: 24),
+          bodyMedium: TextStyle(
+              fontFamily: 'Sans',
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontSize: 18),
+          bodyLarge: TextStyle(
+              fontFamily: 'Sans',
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontSize: 16),
+          bodySmall: TextStyle(
+              fontFamily: 'Sans',
+              fontWeight: FontWeight.normal,
+              color: Colors.white,
+              fontSize: 14)),
+      colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white));
 
+  static ThemeData customPurpleTheme = ThemeData.dark().copyWith(
+    primaryColor: const Color(0xff242248),
+    canvasColor: Colors.transparent,
+    primaryIconTheme: const IconThemeData(color: Colors.black),
+    textTheme: const TextTheme(
+      headlineSmall: TextStyle(
+          fontFamily: 'Sans',
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+          fontSize: 24),
+      bodyMedium: TextStyle(
+          fontFamily: 'Sans',
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+          fontSize: 18),
+      bodyLarge: TextStyle(
+          fontFamily: 'Sans',
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+          fontSize: 16),
+      bodySmall: TextStyle(
+          fontFamily: 'Sans',
+          fontWeight: FontWeight.normal,
+          color: Colors.white,
+          fontSize: 14),
+    ),
+    colorScheme: ColorScheme.fromSwatch()
+        .copyWith(secondary: const Color(0xff8468DD))
+        .copyWith(secondary: const Color(0xff8468DD)),
+  );
+  static ThemeData customLightTheme = ThemeData.light().copyWith(
+    primaryColor: Colors.white,
+    canvasColor: Colors.transparent,
+    primaryIconTheme: const IconThemeData(color: Colors.black),
+    textTheme: const TextTheme(
+      headlineSmall: TextStyle(
+          fontFamily: 'Sans',
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+          fontSize: 24),
+      bodyMedium: TextStyle(
+          fontFamily: 'Sans',
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+          fontSize: 18),
+      bodyLarge: TextStyle(
+          fontFamily: 'Sans',
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+          fontSize: 16),
+      bodySmall: TextStyle(
+          fontFamily: 'Sans',
+          fontWeight: FontWeight.normal,
+          color: Colors.black,
+          fontSize: 14),
+    ),
+    colorScheme: ColorScheme.fromSwatch()
+        .copyWith(secondary: Colors.white)
+        .copyWith(secondary: const Color(0xff8468DD)),
+  );
+}

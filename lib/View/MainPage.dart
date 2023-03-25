@@ -1,78 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hikayat/Controllers/DataController.dart';
 import 'package:hikayat/Controllers/MainController.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:upgrader/upgrader.dart';
+import 'package:hikayat/bricks/snippets/DiscoverGenres.dart';
+import 'package:hikayat/bricks/snippets/StoryGridSlider.dart';
+import 'package:hikayat/bricks/snippets/StorySlider.dart';
 
 class MainPage extends StatelessWidget {
   MainController controller = Get.find();
-  DataController dataController = Get.find();
   MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MainController>(
-      builder: (controller) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text("Main Page"),
+    final controller = Get.put(MainController());
+
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+            Icons.menu,
+            color: Get.theme.colorScheme.secondary,
           ),
-          drawer: const Drawer(),
-          body: UpgradeAlert(
-            upgrader: Upgrader(
-              durationUntilAlertAgain: const Duration(days: 1),
-              dialogStyle: GetPlatform.isAndroid
-                  ? UpgradeDialogStyle.material
-                  : UpgradeDialogStyle.cupertino,
+          onPressed: () {
+            // _scaffoldKey.currentState?.openDrawer();
+          },
+        ),
+        centerTitle: true,
+        title: Text(
+          'Matinee',
+          style: Get.theme.textTheme.headlineSmall,
+        ),
+        backgroundColor: Get.theme.primaryColor,
+        actions: <Widget>[
+          IconButton(
+            color: Get.theme.colorScheme.secondary,
+            icon: const Icon(Icons.search),
+            onPressed: () async {},
+          )
+        ],
+      ),
+      // drawer: Drawer(
+      //   child: SettingsPage(),
+      // ),
+      body: GetBuilder<MainController>(
+        init: controller,
+        builder: (controller) {
+          return Container(
+            color: Get.theme.primaryColor,
+            child: ListView(
+              physics: const ClampingScrollPhysics(),
+              children: const <Widget>[
+                DiscoverGenres(),
+                StorySlider(),
+                StoryGridSlide(),
+                // StorySlider(),
+                // StorySlider(
+                //   themeData: state.themeData,
+                //   title: 'Upcoming Movies',
+                //   api: Endpoints.upcomingMoviesUrl(1),
+                //   genres: _genres,
+                // ),
+                // StorySlider(),
+              ],
             ),
-            child: GetBuilder<MainController>(builder: (context) {
-              return Obx(() {
-                return Column(
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    GridView.builder(
-                      shrinkWrap: true,
-                      itemCount: dataController.categories.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2),
-                      itemBuilder: (BuildContext context, int index) {
-                        if (dataController.categories == []) {
-                          return const CircularProgressIndicator();
-                        } else {
-                          return Card(
-                            child: InkWell(
-                              onTap: () async {
-                                var stories = await dataController.fetchStories(
-                                    dataController.categories[index]);
-                                Get.toNamed("/genre", arguments: stories);
-                              },
-                              child: SizedBox(
-                                child: CachedNetworkImage(
-                                  fit: BoxFit.cover,
-                                  imageUrl:
-                                      dataController.categories[index].imageUrl,
-                                  placeholder: (context, url) => const Center(
-                                      child: CircularProgressIndicator()),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                ),
-                              ),
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                );
-              });
-            }),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

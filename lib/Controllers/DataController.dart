@@ -1,10 +1,12 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/model/DataClass.dart';
 
 class DataController extends GetxController {
   RxList<Category> categories = <Category>[].obs;
-
+  RxList<Story> stories = <Story>[].obs;
   final docRef = FirebaseFirestore.instance.collection("Categories");
 
   Future fetchCategories() async {
@@ -20,6 +22,36 @@ class DataController extends GetxController {
           timestamp: doc["timestamp"]));
     }
     categories.value = data;
+    update();
+  }
+
+  Future fetchAllStories() async {
+    List<Story> data = [];
+   await FirebaseFirestore.instance.collectionGroup("stories").get().then((value) {
+      for (var story in value.docs) {
+        data.add(Story(
+          title: story.id,
+          writer: story["writer"],
+          discription: story["description"],
+          imageUrl: story["image"],
+          chapters: [],
+          genre: story["genre"],
+          timestamp: story["timestamp"],
+          imageRef: story["imageRef"],
+        ));
+      }
+    }).catchError((e) {
+      print(e);
+    });
+    data +=data;
+    data +=data;
+    data +=data;
+    data +=data;
+    data +=data;
+    data +=data;
+    stories.value = data;
+    
+    update();
   }
 
   Future<List<Story>> fetchStories(Category category) async {
