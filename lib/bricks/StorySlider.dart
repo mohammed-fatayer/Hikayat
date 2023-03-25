@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Controllers/DataController.dart';
 
-class StoryGridSlide extends StatefulWidget {
-  const StoryGridSlide({super.key});
+class StorySlider extends StatefulWidget {
+  const StorySlider({super.key});
 
   @override
-  State<StoryGridSlide> createState() => _StoryGridSlideState();
+  State<StorySlider> createState() => _StorySliderState();
 }
 
-class _StoryGridSlideState extends State<StoryGridSlide> {
+class _StorySliderState extends State<StorySlider> {
   DataController controller = Get.find();
   @override
   Widget build(BuildContext context) {
@@ -23,33 +23,30 @@ class _StoryGridSlideState extends State<StoryGridSlide> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    child: Text("Library",
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Latest Added Stories",
                         style: Get.theme.textTheme.headlineSmall),
                   ),
                 ],
               ),
               SizedBox(
                 width: double.infinity,
-             
+                height: Get.height * 0.2,
                 child: controller.stories.isEmpty
                     ? const Center(
                         child: CircularProgressIndicator(),
                       )
-                    : GridView.builder(
-                      shrinkWrap: true,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2),
+                    : ListView.builder(
                         physics: const BouncingScrollPhysics(),
                         itemCount: controller.stories.length,
+                        scrollDirection: Axis.horizontal,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: GestureDetector(
                               onTap: () {},
                               child: Hero(
-                                tag: 'someTag',
+                                tag: controller.stories[index].imageUrl,
                                 child: SizedBox(
                                   width: 100,
                                   child: Column(

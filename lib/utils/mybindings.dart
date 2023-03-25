@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 
 import 'package:get/get.dart';
@@ -18,7 +19,7 @@ class MyBinding extends Bindings {
     // Get.lazyPut(() => AdminController(),fenix:true);
     // Get.lazyPut(() => GifsController(),fenix:true);
     // Get.put<AuthController>(AuthController(), permanent: true);
-    Get.lazyPut(() => GenreController(),fenix:true);
+    Get.lazyPut(() => GenreController(category: Get.arguments),fenix:true);
     Get.lazyPut(() => StoryController(),fenix:true);
     Get.lazyPut(() => ChapterController(),fenix:true);
     Get.put<DataController>(DataController(), permanent: true);

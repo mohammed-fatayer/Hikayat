@@ -28,7 +28,7 @@ class DiscoverGenres extends StatelessWidget {
               ),
               SizedBox(
                 width: double.infinity,
-                height: 150,
+                height: Get.height * 0.3,
                 child: dataController.categories.isEmpty
                     ? const Center(
                         child: CircularProgressIndicator(),
@@ -44,9 +44,13 @@ class DiscoverGenres extends StatelessWidget {
                         itemBuilder:
                             (BuildContext context, int index, pageViewIndex) {
                           return GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Get.toNamed('/genre',
+                                  arguments: dataController
+                                      .categories[index]);
+                            },
                             child: Hero(
-                              tag: dataController.categories[index].title,
+                              tag: controller.categories[index].title,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: CachedNetworkImage(

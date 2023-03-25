@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Controllers/MainController.dart';
-import 'package:hikayat/bricks/snippets/DiscoverGenres.dart';
-import 'package:hikayat/bricks/snippets/StoryGridSlider.dart';
-import 'package:hikayat/bricks/snippets/StorySlider.dart';
+import 'package:hikayat/bricks/DiscoverGenres.dart';
+import 'package:hikayat/bricks/StoryGridSlider.dart';
+import 'package:hikayat/bricks/StorySlider.dart';
+
 
 class MainPage extends StatelessWidget {
   MainController controller = Get.find();

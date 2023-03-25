@@ -5,9 +5,9 @@ import 'package:hikayat/Localizations/local.dart';
 import 'package:hikayat/View/ChapterPage.dart';
 import 'package:hikayat/View/GenrePage.dart';
 import 'package:hikayat/View/StoryPage.dart';
-import 'package:hikayat/bricks/snippets/Onboarding.dart';
-import 'package:hikayat/theme/theme.dart';
+import 'package:hikayat/bricks/Onboarding.dart';
 import 'package:hikayat/utils/mybindings.dart';
+import 'package:hikayat/theme/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Localizations/localeController.dart';
 import 'firebase_options.dart';
@@ -60,9 +60,7 @@ class MyApp extends StatelessWidget {
           ),
           GetPage(
               name: "/genre",
-              page: () => GenrePage(
-                    stories: Get.arguments,
-                  )),
+              page: () => GenrePage()),
           GetPage(name: "/onboarding", page: () => const OnboardingPage1()),
           GetPage(
               name: "/story",

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/model/DataClass.dart';
@@ -27,7 +25,10 @@ class DataController extends GetxController {
 
   Future fetchAllStories() async {
     List<Story> data = [];
-   await FirebaseFirestore.instance.collectionGroup("stories").get().then((value) {
+    await FirebaseFirestore.instance
+        .collectionGroup("stories")
+        .get()
+        .then((value) {
       for (var story in value.docs) {
         data.add(Story(
           title: story.id,
@@ -43,14 +44,9 @@ class DataController extends GetxController {
     }).catchError((e) {
       print(e);
     });
-    data +=data;
-    data +=data;
-    data +=data;
-    data +=data;
-    data +=data;
-    data +=data;
+
     stories.value = data;
-    
+
     update();
   }
 
