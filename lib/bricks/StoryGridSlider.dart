@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Controllers/DataController.dart';
+
 import 'package:hikayat/model/DataClass.dart';
 
 class StoryGridSlide extends StatefulWidget {
@@ -16,12 +17,10 @@ class _StoryGridSlideState extends State<StoryGridSlide> {
 
   @override
   Widget build(BuildContext context) {
-     ThemeData theme = context.theme;
+    ThemeData theme = context.theme;
     return GetBuilder<DataController>(
-      
         init: controller,
         builder: (context) {
-         
           List<Story> randomStories = controller.sortStoriesByRandom();
           return Column(
             children: <Widget>[
@@ -30,17 +29,17 @@ class _StoryGridSlideState extends State<StoryGridSlide> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10.0),
-                    child: Text("Library",
-                        style: theme.textTheme.headlineSmall),
+                    child:
+                        Text("Library", style: theme.textTheme.headlineSmall),
                   ),
                 ],
               ),
               SizedBox(
                 width: double.infinity,
                 child: randomStories.isEmpty
-                    ? Center(
-                      child: Image.asset("assets/images/loading.gif"),
-                    )
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
                     : GridView.builder(
                         shrinkWrap: true,
                         gridDelegate:
@@ -51,7 +50,7 @@ class _StoryGridSlideState extends State<StoryGridSlide> {
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
+                            child: InkWell(
                               onTap: () {
                                 Get.toNamed("/story",
                                     arguments: randomStories[index]);
@@ -63,17 +62,17 @@ class _StoryGridSlideState extends State<StoryGridSlide> {
                                     children: <Widget>[
                                       Expanded(
                                         child: ClipRRect(
-                                            
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
                                             child: CachedNetworkImage(
-                                              imageUrl: randomStories[index]
-                                                  .imageUrl, fit: BoxFit.cover,
+                                              imageUrl:
+                                                  randomStories[index].imageUrl,
+                                              fit: BoxFit.cover,
                                               placeholder: (context, url) =>
                                                   Image.asset(
-                                                "assets/images/loading.gif", fit: BoxFit.cover,
+                                                "assets/images/loading.gif",
+                                                fit: BoxFit.cover,
                                               ),
-                                          
                                             )),
                                       ),
                                       Padding(

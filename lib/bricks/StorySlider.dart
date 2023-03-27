@@ -16,7 +16,7 @@ class _StorySliderState extends State<StorySlider> {
 
   @override
   Widget build(BuildContext context) {
-  ThemeData theme = context.theme;
+    ThemeData theme = context.theme;
     return GetBuilder<DataController>(
         init: controller,
         builder: (context) {
@@ -37,11 +37,7 @@ class _StorySliderState extends State<StorySlider> {
                 width: double.infinity,
                 height: Get.height * 0.2,
                 child: sotredStories.isEmpty
-                    ? Center(
-                        child: Image.asset(
-                          "assets/images/loading.gif",
-                        ),
-                      )
+                    ? const Center(child: CircularProgressIndicator())
                     : ListView.builder(
                         physics: const BouncingScrollPhysics(),
                         itemCount: sotredStories.length,
@@ -49,7 +45,7 @@ class _StorySliderState extends State<StorySlider> {
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
+                            child: InkWell(
                               onTap: () {
                                 Get.toNamed("/story",
                                     arguments: sotredStories[index]);
@@ -79,7 +75,8 @@ class _StorySliderState extends State<StorySlider> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
                                           sotredStories[index].title,
-                                          style: context.theme.textTheme.bodyLarge,
+                                          style:
+                                              context.theme.textTheme.bodyLarge,
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       )

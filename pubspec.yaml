@@ -45,7 +45,6 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.6.5
-  in_app_update: ^4.0.1
   shared_preferences: ^2.0.18
   smooth_page_indicator: ^1.0.1
   upgrader: ^6.2.0
@@ -60,13 +59,9 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
 
-
-
-
-
   assets:
     - assets/images/
-  
+
   fonts:
     - family: Sans
       fonts:
@@ -74,7 +69,20 @@ flutter:
         - asset: assets/fonts/ProductSans-Italic.ttf
           style: italic
         - asset: assets/fonts/ProductSans-Bold.ttf
-          weight: 700  
+          weight: 700
+    - family: Amiri
+      fonts:
+        - asset: assets/fonts/arabic/Amiri-Regular.ttf
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/arabic/Cairo-VariableFont_slnt,wght.ttf
+    - family: Changa
+      fonts:
+        - asset: assets/fonts/arabic/Changa-VariableFont_wght.ttf
+    - family: ELMessiri
+      fonts:
+        - asset: assets/fonts/arabic/ElMessiri-VariableFont_wght.ttf
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

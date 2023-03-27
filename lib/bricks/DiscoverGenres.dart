@@ -30,8 +30,8 @@ class DiscoverGenres extends StatelessWidget {
                 width: double.infinity,
                 height: Get.height * 0.3,
                 child: dataController.categories.isEmpty
-                    ?  Center(
-                        child: Image.asset("assets/images/loading.gif"),
+                    ? const Center(
+                        child: CircularProgressIndicator(),
                       )
                     : CarouselSlider.builder(
                         options: CarouselOptions(
@@ -43,20 +43,22 @@ class DiscoverGenres extends StatelessWidget {
                         ),
                         itemBuilder:
                             (BuildContext context, int index, pageViewIndex) {
-                          return GestureDetector(
+                          return InkWell(
                             onTap: () {
                               Get.toNamed('/genre',
-                                  arguments: dataController
-                                      .categories[index]);
+                                  arguments: dataController.categories[index]);
                             },
                             child: Hero(
                               tag: controller.categories[index].title,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: CachedNetworkImage(
-                                    imageUrl: dataController
-                                        .categories[index].imageUrl,
-                                    fit: BoxFit.cover,placeholder: (context, url) => Image.asset("assets/images/loading.gif"),),
+                                  imageUrl:
+                                      dataController.categories[index].imageUrl,
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) =>
+                                      Image.asset("assets/images/loading.gif"),
+                                ),
                               ),
                             ),
                           );

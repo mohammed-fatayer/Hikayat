@@ -5,6 +5,7 @@ import 'package:hikayat/Controllers/GenreController.dart';
 import 'package:hikayat/bricks/ParticularGenreStories.dart';
 import 'package:hikayat/model/DataClass.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:ui';
 
 class GenrePage extends StatelessWidget {
   GenrePage({super.key});
@@ -34,6 +35,14 @@ class GenrePage extends StatelessWidget {
                         }),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 15, sigmaY: 20),
+                        child: Container(
+                          color: Colors.black.withOpacity(0.2),
+                        ),
                       ),
                     ),
                     Container(
@@ -124,9 +133,7 @@ class GenrePage extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: SingleChildScrollView(
-                                    physics: const BouncingScrollPhysics(
-                                      
-                                    ),
+                                    physics: const BouncingScrollPhysics(),
                                     child: Column(
                                       children: <Widget>[
                                         SizedBox(
@@ -155,7 +162,7 @@ class GenrePage extends StatelessWidget {
                                         ),
                                         SizedBox(
                                           height: Get.height * 0.1,
-                                        ),  
+                                        ),
                                         Row(
                                           children: <Widget>[
                                             Padding(
@@ -170,7 +177,6 @@ class GenrePage extends StatelessWidget {
                                           ],
                                         ),
                                         ParticularGenreStories()
-                           
                                       ],
                                     ),
                                   ),

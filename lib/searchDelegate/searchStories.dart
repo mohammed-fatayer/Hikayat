@@ -59,7 +59,6 @@ class SearchStories extends SearchDelegate {
     return GetBuilder<DataController>(
       builder: (controller) {
         return Scaffold(
-          appBar: AppBar(),
           body: SearchDelegateResults(
             query: query,
           ),

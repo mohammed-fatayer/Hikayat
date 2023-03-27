@@ -7,29 +7,28 @@ import 'package:hikayat/model/DataClass.dart';
 class SearchDelegateResults extends StatelessWidget {
   DataController controller = Get.find();
   final String query;
-   SearchDelegateResults({super.key, required this.query});
+  SearchDelegateResults({super.key, required this.query});
 
   @override
   Widget build(BuildContext context) {
     List<Story> stories = controller.searchDelegateStories(query);
     return Container(
-      // height: Get.height * 0.8,
-      // width: Get.width*0.9,
+      height: Get.height,
+      width: Get.width,
       color: context.theme.primaryColor.withOpacity(0.8),
       child: stories.isEmpty
-          ?  Center(
-              child: Image.asset("assets/images/loading.gif",fit: BoxFit.cover,),
+          ? const Center(
+              child: CircularProgressIndicator(),
             )
           : ListView.builder(
-            
               physics: const BouncingScrollPhysics(),
               itemCount: stories.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
-                     Get.toNamed("/story", arguments: stories[index]);
+                      Get.toNamed("/story", arguments: stories[index]);
                     },
                     child: SizedBox(
                       height: 150,
@@ -44,7 +43,8 @@ class SearchDelegateResults extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8.0),
                                   border: Border.all(
                                       width: 1,
-                                      color: context.theme.colorScheme.secondary)),
+                                      color:
+                                          context.theme.colorScheme.secondary)),
                               height: 100,
                               child: Padding(
                                 padding: const EdgeInsets.only(
@@ -54,7 +54,7 @@ class SearchDelegateResults extends StatelessWidget {
                                   children: <Widget>[
                                     Text(
                                       stories[index].title,
-                                      style: context.theme.textTheme.bodyMedium,
+                                      style: Get.theme.textTheme.bodyMedium,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                     Padding(
@@ -75,11 +75,17 @@ class SearchDelegateResults extends StatelessWidget {
                               width: 100,
                               height: 125,
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child:CachedNetworkImage(imageUrl: stories[index].imageUrl,fit: BoxFit.cover,placeholder: (context, url) {
-                                  return Image.asset("assets/images/loading.gif",fit: BoxFit.cover,);
-                                },)
-                              ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: CachedNetworkImage(
+                                    imageUrl: stories[index].imageUrl,
+                                    fit: BoxFit.cover,
+                                    placeholder: (context, url) {
+                                      return Image.asset(
+                                        "assets/images/loading.gif",
+                                        fit: BoxFit.cover,
+                                      );
+                                    },
+                                  )),
                             ),
                           )
                         ],

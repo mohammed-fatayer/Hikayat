@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Controllers/MainController.dart';
+import 'package:hikayat/main.dart';
 import 'package:hikayat/theme/theme.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -105,16 +106,21 @@ class DrawerWidget extends StatelessWidget {
                                       case 0:
                                         Get.changeTheme(
                                             Themes.customLightTheme);
+                                            sharedpref!.setString("theme", "light");
                                              controller.update();
                                         break;
                                       case 1:
                                           Get.changeTheme(
                                             Themes.customPurpleTheme);
+
+                                             sharedpref!.setString("theme", "purple");
                                          controller.update();
                                         break;
                                       case 2:
                                      
                                             Get.changeTheme(Themes.customDarkTheme);
+
+                                             sharedpref!.setString("theme", "dark");
                                         controller.update();
 
                                         break;

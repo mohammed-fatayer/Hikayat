@@ -46,8 +46,6 @@ class MyApp extends StatelessWidget {
             ? Themes.customLightTheme
             : theme == "dark" ? Themes.customDarkTheme 
             : Themes.customPurpleTheme,
-        // theme:Themes.customDarkTheme,
-        // theme: Themes.customPurpleTheme,
         initialRoute: showOnBoarding ? "/onboarding" : "/",
         getPages: [
           GetPage(
@@ -71,7 +69,7 @@ class MyApp extends StatelessWidget {
           GetPage(
               name: "/chapter",
               page: () => ChapterPage(
-                    chapter: Get.arguments,
+                    
                   )),
         ]);
   }

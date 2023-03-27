@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+
 class Themes {
   static ThemeData customDarkTheme = ThemeData.dark().copyWith(
       primaryColor: Colors.black,
       canvasColor: Colors.transparent,
       primaryIconTheme: const IconThemeData(color: Colors.black),
+      
       textTheme: const TextTheme(
           headlineSmall: TextStyle(
               fontFamily: 'Sans',
@@ -26,7 +28,12 @@ class Themes {
               fontWeight: FontWeight.normal,
               color: Colors.white,
               fontSize: 14)),
-      colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white));
+              
+      colorScheme: ColorScheme.fromSwatch().
+      copyWith(secondary: Colors.white).
+      copyWith(secondary: Colors.white)
+      
+      );
 
   static ThemeData customPurpleTheme = ThemeData.dark().copyWith(
     primaryColor: const Color(0xff242248),

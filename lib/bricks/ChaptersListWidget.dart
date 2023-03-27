@@ -4,12 +4,14 @@ import 'package:hikayat/Controllers/DataController.dart';
 import 'package:hikayat/model/DataClass.dart';
 
 class ChaptersListWidget extends StatelessWidget {
-   Story story = Get.arguments;
-  ChaptersListWidget({super.key,required this.story});
+  final Story story;
+
+
+  ChaptersListWidget({super.key, required this.story});
 
   DataController dataController = Get.find();
   @override
- Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     dataController.fetchChapters(story);
     return GetBuilder(
         init: dataController,
@@ -18,7 +20,13 @@ class ChaptersListWidget extends StatelessWidget {
             color: context.theme.primaryColor,
             child: contoller.chapters.isEmpty
                 ? const Center(
-                    child: Text("Oops! couldn't find the chapters",style: TextStyle(color: Colors.black,fontFamily: "Roboto",fontSize: 25),),
+                    child: Text(
+                      "Oops! couldn't find the chapters",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: "Roboto",
+                          fontSize: 25),
+                    ),
                   )
                 : contoller.chapters.isEmpty
                     ? Center(
@@ -28,14 +36,21 @@ class ChaptersListWidget extends StatelessWidget {
                         ),
                       )
                     : ListView.builder(
-                      shrinkWrap: true,
+                        shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
                         itemCount: contoller.chapters.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () {},
+                            child: InkWell(
+                              onTap: () {
+
+                                String storyname = story.title;
+                                Get.toNamed("/chapter", arguments: {
+                                  "storyname": storyname,
+                                  "chapter": contoller.chapters[index]
+                                });
+                              },
                               child: Column(
                                 children: <Widget>[
                                   Row(
@@ -68,7 +83,8 @@ class ChaptersListWidget extends StatelessWidget {
                                         horizontal: 24.0),
                                     child: Divider(
                                       thickness: 2,
-                                      color: context.theme.colorScheme.secondary,
+                                      color:
+                                          context.theme.colorScheme.secondary,
                                     ),
                                   )
                                 ],
