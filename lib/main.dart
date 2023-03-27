@@ -23,6 +23,7 @@ void main() async {
   );
   sharedpref = await SharedPreferences.getInstance();
   showOnBoarding = sharedpref?.getBool("firstopen") ?? true;
+
   runApp(const MyApp());
 }
 
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LocaleController controller = Get.put(LocaleController());
-    bool? theme = sharedpref!.getBool("theme");
+    String? theme = sharedpref!.getString("theme");
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'PrakTID',
@@ -41,9 +42,12 @@ class MyApp extends StatelessWidget {
         fallbackLocale: const Locale("en"),
         translations: MyLocale(),
         initialBinding: MyBinding(),
-        // theme: theme == true ? Themes.customDarkTheme : Themes.customLightTheme,
+        theme: theme == "light"
+            ? Themes.customLightTheme
+            : theme == "dark" ? Themes.customDarkTheme 
+            : Themes.customPurpleTheme,
         // theme:Themes.customDarkTheme,
-        theme: Themes.customPurpleTheme,
+        // theme: Themes.customPurpleTheme,
         initialRoute: showOnBoarding ? "/onboarding" : "/",
         getPages: [
           GetPage(
@@ -58,15 +62,12 @@ class MyApp extends StatelessWidget {
                 ),
                 child: MainPage()),
           ),
-          GetPage(
-              name: "/genre",
-              page: () => GenrePage()),
+          GetPage(name: "/genre", page: () => GenrePage()),
           GetPage(name: "/onboarding", page: () => const OnboardingPage1()),
           GetPage(
-              name: "/story",
-              page: () => StoryPage(
-                    chapters: Get.arguments,
-                  )),
+            name: "/story",
+            page: () => StoryPage(),
+          ),
           GetPage(
               name: "/chapter",
               page: () => ChapterPage(

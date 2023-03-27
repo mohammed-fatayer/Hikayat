@@ -4,23 +4,24 @@ import 'package:get/get.dart';
 import 'package:hikayat/Controllers/DataController.dart';
 import 'package:hikayat/model/DataClass.dart';
 
-class ParticularGenreStories extends StatelessWidget {
+class SearchDelegateResults extends StatelessWidget {
   DataController controller = Get.find();
-   ParticularGenreStories({super.key});
+  final String query;
+   SearchDelegateResults({super.key, required this.query});
 
   @override
   Widget build(BuildContext context) {
-    List<Story> stories = controller.stories;
+    List<Story> stories = controller.searchDelegateStories(query);
     return Container(
       // height: Get.height * 0.8,
       // width: Get.width*0.9,
       color: context.theme.primaryColor.withOpacity(0.8),
       child: stories.isEmpty
           ?  Center(
-              child: Image.asset("assets/images/loading.gif"),
+              child: Image.asset("assets/images/loading.gif",fit: BoxFit.cover,),
             )
           : ListView.builder(
-              shrinkWrap: true,
+            
               physics: const BouncingScrollPhysics(),
               itemCount: stories.length,
               itemBuilder: (BuildContext context, int index) {
@@ -28,7 +29,7 @@ class ParticularGenreStories extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
                     onTap: () {
-                      Get.toNamed("/story", arguments: stories[index]);
+                     Get.toNamed("/story", arguments: stories[index]);
                     },
                     child: SizedBox(
                       height: 150,

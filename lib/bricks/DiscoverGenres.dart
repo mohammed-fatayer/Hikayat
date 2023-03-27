@@ -22,7 +22,7 @@ class DiscoverGenres extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text('Discover',
-                        style: Get.theme.textTheme.headlineSmall),
+                        style: context.theme.textTheme.headlineSmall),
                   ),
                 ],
               ),
@@ -30,8 +30,8 @@ class DiscoverGenres extends StatelessWidget {
                 width: double.infinity,
                 height: Get.height * 0.3,
                 child: dataController.categories.isEmpty
-                    ? const Center(
-                        child: CircularProgressIndicator(),
+                    ?  Center(
+                        child: Image.asset("assets/images/loading.gif"),
                       )
                     : CarouselSlider.builder(
                         options: CarouselOptions(
@@ -56,7 +56,7 @@ class DiscoverGenres extends StatelessWidget {
                                 child: CachedNetworkImage(
                                     imageUrl: dataController
                                         .categories[index].imageUrl,
-                                    fit: BoxFit.cover),
+                                    fit: BoxFit.cover,placeholder: (context, url) => Image.asset("assets/images/loading.gif"),),
                               ),
                             ),
                           );

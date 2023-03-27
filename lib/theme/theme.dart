@@ -57,6 +57,7 @@ class Themes {
     colorScheme: ColorScheme.fromSwatch()
         .copyWith(secondary: const Color(0xff8468DD))
         .copyWith(secondary: const Color(0xff8468DD)),
+        
   );
   static ThemeData customLightTheme = ThemeData.light().copyWith(
     primaryColor: Colors.white,

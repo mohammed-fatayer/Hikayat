@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Controllers/DataController.dart';
+import 'package:hikayat/model/DataClass.dart';
 
 class StorySlider extends StatefulWidget {
   const StorySlider({super.key});
@@ -12,11 +13,14 @@ class StorySlider extends StatefulWidget {
 
 class _StorySliderState extends State<StorySlider> {
   DataController controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
+  ThemeData theme = context.theme;
     return GetBuilder<DataController>(
         init: controller,
         builder: (context) {
+          List<Story> sotredStories = controller.sortStoriesByDate();
           return Column(
             children: <Widget>[
               Row(
@@ -24,29 +28,34 @@ class _StorySliderState extends State<StorySlider> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text("Latest Added Stories",
-                        style: Get.theme.textTheme.headlineSmall),
+                    child: Text("Latest Added sotredStories",
+                        style: theme.textTheme.headlineSmall),
                   ),
                 ],
               ),
               SizedBox(
                 width: double.infinity,
                 height: Get.height * 0.2,
-                child: controller.stories.isEmpty
-                    ? const Center(
-                        child: CircularProgressIndicator(),
+                child: sotredStories.isEmpty
+                    ? Center(
+                        child: Image.asset(
+                          "assets/images/loading.gif",
+                        ),
                       )
                     : ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: controller.stories.length,
+                        itemCount: sotredStories.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Get.toNamed("/story",
+                                    arguments: sotredStories[index]);
+                              },
                               child: Hero(
-                                tag: controller.stories[index].imageUrl,
+                                tag: sotredStories[index].imageUrl,
                                 child: SizedBox(
                                   width: 100,
                                   child: Column(
@@ -56,16 +65,21 @@ class _StorySliderState extends State<StorySlider> {
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
                                             child: CachedNetworkImage(
-                                              imageUrl: controller
-                                                  .stories[index].imageUrl,
+                                              imageUrl:
+                                                  sotredStories[index].imageUrl,
+                                              placeholder: (context, url) =>
+                                                  Image.asset(
+                                                "assets/images/loading.gif",
+                                                fit: BoxFit.cover,
+                                              ),
                                               fit: BoxFit.cover,
                                             )),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
-                                          controller.stories[index].title,
-                                          style: Get.theme.textTheme.bodyLarge,
+                                          sotredStories[index].title,
+                                          style: context.theme.textTheme.bodyLarge,
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       )

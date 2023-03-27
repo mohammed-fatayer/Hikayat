@@ -97,9 +97,8 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                               Padding(
                                 padding: const EdgeInsets.all(16.0),
                                 child: Text(item.title,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline6
+                                    style: context.theme.textTheme
+                                        .titleLarge
                                         ?.copyWith(
                                           fontWeight: FontWeight.bold,
                                           color: item.textColor,
@@ -112,7 +111,7 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                                     horizontal: 24.0, vertical: 8.0),
                                 child: Text(item.description,
                                     textAlign: TextAlign.center,
-                                    style: Theme.of(context)
+                                    style: Get.theme
                                         .textTheme
                                         .bodyMedium
                                         ?.copyWith(
@@ -158,8 +157,8 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                                 fontSize: 16, fontWeight: FontWeight.bold)),
                         onPressed: () {
                           widget.onSkip?.call();
-                             Get.offNamed("/");
-                             sharedpref!.setBool("firstopen", false);
+                          Get.offNamed("/");
+                          sharedpref!.setBool("firstopen", false);
                         },
                         child: const Text("Skip")),
                     TextButton(

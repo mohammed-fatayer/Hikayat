@@ -5,6 +5,8 @@ import 'package:hikayat/model/DataClass.dart';
 class DataController extends GetxController {
   RxList<Category> categories = <Category>[].obs;
   RxList<Story> stories = <Story>[].obs;
+  RxList<Chapter> chapters = <Chapter>[].obs;
+
   final docRef = FirebaseFirestore.instance.collection("Categories");
 
   Future fetchCategories() async {
@@ -69,7 +71,23 @@ class DataController extends GetxController {
     return data;
   }
 
-  fetchChapters(Story story) async {
+  List<Story> sortStoriesByDate() {
+    List<Story> list = List<Story>.from(stories);
+    if (stories.isNotEmpty) {
+      list.sort((a, b) => b.timestamp!.toDate().compareTo(a.timestamp!.toDate()));
+      return list;
+    } else {
+      return list;
+    }
+  }
+
+  List<Story> sortStoriesByRandom() {
+    List<Story> list = List<Story>.from(stories);
+    list.shuffle();
+    return list;
+  }
+
+  Future fetchChapters(Story story) async {
     var refchapters = await docRef
         .doc(story.genre)
         .collection("stories")
@@ -85,6 +103,19 @@ class DataController extends GetxController {
         chapterid: doc.id,
         timestamp: doc["timestamp"],
       ));
+      
+    }
+    chapters.value = data;
+    update();
+    return data;
+  }
+
+  List<Story> searchDelegateStories(String query) {
+    List<Story> data = [];
+    for (var story in stories) {
+      if (story.title.toLowerCase().contains(query.toLowerCase())) {
+        data.add(story);
+      }
     }
     return data;
   }

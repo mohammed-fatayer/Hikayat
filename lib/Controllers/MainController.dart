@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Controllers/DataController.dart';
 
@@ -11,4 +12,6 @@ class MainController extends GetxController {
     await dataController.fetchAllStories();
     super.onInit();
   }
+
+
 }
