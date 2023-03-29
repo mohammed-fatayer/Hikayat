@@ -30,7 +30,7 @@ class _StoryGridSlideState extends State<StoryGridSlide> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10.0),
                     child:
-                        Text("Library", style: theme.textTheme.headlineSmall),
+                        Text("Library".tr, style: theme.textTheme.headlineSmall),
                   ),
                 ],
               ),

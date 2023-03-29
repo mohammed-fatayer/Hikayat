@@ -6,7 +6,8 @@ import 'package:hikayat/theme/theme.dart';
 
 class DrawerWidget extends StatelessWidget {
   final MainController controller = Get.find();
-
+ 
+  final String _fontFamily = 'Amiri';
   final List<Color> colors = [
     Colors.white,
     const Color(0xff242248),
@@ -28,31 +29,144 @@ class DrawerWidget extends StatelessWidget {
             Expanded(
               child: Center(
                 child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: CircleAvatar(
-                            backgroundColor: context.theme.colorScheme.secondary,
-                            radius: 40,
-                            child: Icon(
-                              Icons.person_outline,
-                              size: 40,
-                              color: context.theme.primaryColor,
-                            )),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Log In / Sign Up',
-                          style: context.theme.textTheme.bodyLarge,
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: Obx(() {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text("Font family".tr,
+                            style: controller.chaptertexttheme.value.bodyLarge),
+                        const Divider(),
+                        DropdownButton<String>(
+                            value: controller.fontfamily.value,
+                            style: controller.chaptertexttheme.value.bodyLarge
+                                ?.copyWith(fontSize: 18),
+                            items: [
+                              DropdownMenuItem(
+                                  value: "Amiri",
+                                  child: Text(
+                                    "Amiri".tr,
+                                    style: const TextStyle(fontFamily: "Amiri"),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "Cairo",
+                                  child: Text(
+                                    "Cairo".tr,
+                                    style: const TextStyle(fontFamily: "Cairo"),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "Changa",
+                                  child: Text(
+                                    "Changa".tr,
+                                    style:
+                                        const TextStyle(fontFamily: "Changa"),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "ElMessiri",
+                                  child: Text(
+                                    "ElMessiri".tr,
+                                    style: const TextStyle(
+                                        fontFamily: "ElMessiri"),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "Harmattan",
+                                  child: Text(
+                                    "Harmattan".tr,
+                                    style: const TextStyle(
+                                        fontFamily: "Harmattan"),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "Kufi",
+                                  child: Text(
+                                    "Kufi".tr,
+                                    style: const TextStyle(fontFamily: "Kufi"),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "Lateef",
+                                  child: Text(
+                                    "Lateef".tr,
+                                    style:
+                                        const TextStyle(fontFamily: "Lateef"),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "MarkaziText".tr,
+                                  child: Text(
+                                    "MarkaziText".tr,
+                                    style: const TextStyle(
+                                        fontFamily: "MarkaziText"),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "ReemKufi",
+                                  child: Text(
+                                    "ReemKufi".tr,
+                                    style:
+                                        const TextStyle(fontFamily: "ReemKufi"),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "Rajawal",
+                                  child: Text(
+                                    "Tajawal".tr,
+                                    style:
+                                        const TextStyle(fontFamily: "Tajawal"),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "Mada",
+                                  child: Text(
+                                    "Mada".tr,
+                                    style: const TextStyle(fontFamily: "Mada"),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "Marhey",
+                                  child: Text(
+                                    "Marhey".tr,
+                                    style:
+                                        const TextStyle(fontFamily: "Marhey"),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "SansArabic".tr,
+                                  child: Text(
+                                    "SansArabic".tr,
+                                    style: const TextStyle(
+                                        fontFamily: "SansArabic"),
+                                  )),
+                              DropdownMenuItem(
+                                  value: "Lalezar",
+                                  child: Text(
+                                    "Lalezar".tr,
+                                    style:
+                                        const TextStyle(fontFamily: "Lalezar"),
+                                  )),
+                            ],
+                            onChanged: (value) {
+                              controller.fontfamily.value = value!;
+                              controller.changeTextTheme();
+                            }),
+                        const Divider(),
+                        Text("Font Size".tr,
+                            style: controller.chaptertexttheme.value.bodyLarge),
+                        const Divider(),
+                        Slider(
+                            value: controller.fontsize.value.toDouble(),
+                            min: 20,
+                            max: 35,
+                            onChanged: (value) {
+                              controller.fontsize.value = value.toInt();
+                              controller.changeTextTheme();
+                            }),
+                        const Divider(),
+                        CheckboxListTile(
+                            title: Text("Add Background Image".tr,
+                                style: const TextStyle(fontSize: 22)),
+                            value:  controller.showBackgroundImage,
+                            onChanged: (value) {
+                              value = !value!;
+                              controller.changeBackgroundImage();
+                              
+                            }),
+                      ],
+                    );
+                  }),
                 ),
               ),
             ),
@@ -61,7 +175,7 @@ class DrawerWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Theme',
+                    'Theme'.tr,
                     style: context.theme.textTheme.bodyLarge,
                   ),
                 ],
@@ -106,21 +220,24 @@ class DrawerWidget extends StatelessWidget {
                                       case 0:
                                         Get.changeTheme(
                                             Themes.customLightTheme);
-                                            sharedpref!.setString("theme", "light");
-                                             controller.update();
+                                        sharedpref!.setString("theme", "light");
+                                        controller.changeTextTheme();
+                                        controller.update();
                                         break;
                                       case 1:
-                                          Get.changeTheme(
+                                        Get.changeTheme(
                                             Themes.customPurpleTheme);
 
-                                             sharedpref!.setString("theme", "purple");
-                                         controller.update();
+                                        sharedpref!
+                                            .setString("theme", "purple");
+                                        controller.changeTextTheme();
+                                        controller.update();
                                         break;
                                       case 2:
-                                     
-                                            Get.changeTheme(Themes.customDarkTheme);
+                                        Get.changeTheme(Themes.customDarkTheme);
 
-                                             sharedpref!.setString("theme", "dark");
+                                        sharedpref!.setString("theme", "dark");
+                                        controller.changeTextTheme();
                                         controller.update();
 
                                         break;
@@ -132,8 +249,8 @@ class DrawerWidget extends StatelessWidget {
                                     child: context.theme.primaryColor ==
                                             colors[index]
                                         ? Icon(Icons.done,
-                                            color:
-                                                context.theme.colorScheme.secondary)
+                                            color: context
+                                                .theme.colorScheme.secondary)
                                         : Container(),
                                   ),
                                 ),

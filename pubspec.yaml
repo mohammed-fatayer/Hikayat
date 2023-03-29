@@ -82,6 +82,36 @@ flutter:
     - family: ELMessiri
       fonts:
         - asset: assets/fonts/arabic/ElMessiri-VariableFont_wght.ttf
+    - family: Changa
+      fonts:
+        - asset: assets/fonts/arabic/Changa-VariableFont_wght.ttf
+    - family: SansArabic
+      fonts:
+        - asset: assets\fonts\arabic\IBMPlexSansArabic-Regular.ttf
+    - family: Lalezar
+      fonts:
+        - asset: assets\fonts\arabic\Lalezar-Regular.ttf
+    - family: Lateef
+      fonts:
+        - asset: assets\fonts\arabic\Lateef-Regular.ttf
+    - family: Gulzar
+      fonts:
+        - asset: assets\fonts\arabic\Gulzar-Regular.ttf
+    - family: Mada
+      fonts:
+        - asset: assets\fonts\arabic\Mada-Regular.ttf
+    - family: Marhey
+      fonts:
+        - asset: assets\fonts\arabic\Marhey-VariableFont_wght.ttf
+    - family: MarkaziText
+      fonts:
+        - asset: assets\fonts\arabic\MarkaziText-VariableFont_wght.ttf
+    - family: ReemKufi
+      fonts:
+        - asset: assets\fonts\arabic\ReemKufi-VariableFont_wght.ttf
+    - family: Tajawal
+      fonts:
+        - asset: assets\fonts\arabic\Tajawal-Regular.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

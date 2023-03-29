@@ -26,7 +26,7 @@ class MainPage extends StatelessWidget {
         
         leading: IconButton(
           icon: Icon(
-            Icons.menu,
+            Icons.settings,
             color: context.theme.colorScheme.secondary,
           ),
           onPressed: () {
@@ -35,7 +35,7 @@ class MainPage extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          'Matinee',
+          'Hikayat'.tr,
           style: context.theme.textTheme.headlineSmall,
         ),
         backgroundColor: context.theme.primaryColor,

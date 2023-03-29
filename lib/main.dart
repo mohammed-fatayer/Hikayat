@@ -37,9 +37,9 @@ class MyApp extends StatelessWidget {
     String? theme = sharedpref!.getString("theme");
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'PrakTID',
+        title: 'Hikayat',
         locale: controller.initlanguage,
-        fallbackLocale: const Locale("en"),
+        fallbackLocale: const Locale("ar"),
         translations: MyLocale(),
         initialBinding: MyBinding(),
         theme: theme == "light"

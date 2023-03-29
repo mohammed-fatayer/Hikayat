@@ -143,9 +143,9 @@ class GenrePage extends StatelessWidget {
                                           children: <Widget>[
                                             Padding(
                                               padding: const EdgeInsets.only(
-                                                  left: 8.0),
+                                                  right: 20.0),
                                               child: Text(
-                                                'Overview',
+                                                'Overview'.tr,
                                                 style: Get
                                                     .theme.textTheme.bodyLarge,
                                               ),
@@ -167,9 +167,9 @@ class GenrePage extends StatelessWidget {
                                           children: <Widget>[
                                             Padding(
                                               padding: const EdgeInsets.only(
-                                                  left: 8.0),
+                                                  right:20.0),
                                               child: Text(
-                                                'Stories',
+                                                'Stories'.tr,
                                                 style: Get
                                                     .theme.textTheme.bodyLarge,
                                               ),

@@ -6,7 +6,6 @@ import 'package:hikayat/model/DataClass.dart';
 class ChaptersListWidget extends StatelessWidget {
   final Story story;
 
-
   ChaptersListWidget({super.key, required this.story});
 
   DataController dataController = Get.find();
@@ -19,19 +18,23 @@ class ChaptersListWidget extends StatelessWidget {
           return Container(
             color: context.theme.primaryColor,
             child: contoller.chapters.isEmpty
-                ? const Center(
-                    child: Text(
-                      "Oops! couldn't find the chapters",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: "Roboto",
-                          fontSize: 25),
+                ? Center(
+                    child: Padding(
+
+                      padding: const EdgeInsets.only(top: 100.0),
+                      child: Text(
+                        "Oops! couldn't find any chapters".tr,
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontFamily: "Roboto",
+                            fontSize: 25),
+                      ),
                     ),
                   )
                 : contoller.chapters.isEmpty
                     ? Center(
                         child: Text(
-                          "Oops! couldn't find the chapters",
+                          "Oops! couldn't find any chapters".tr,
                           style: context.theme.textTheme.bodyLarge,
                         ),
                       )
@@ -44,7 +47,6 @@ class ChaptersListWidget extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: InkWell(
                               onTap: () {
-
                                 String storyname = story.title;
                                 Get.toNamed("/chapter", arguments: {
                                   "storyname": storyname,

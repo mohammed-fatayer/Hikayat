@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,6 +33,14 @@ class StoryPage extends StatelessWidget {
                         }),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 15, sigmaY: 20),
+                        child: Container(
+                          color: Colors.black.withOpacity(0.2),
+                        ),
                       ),
                     ),
                     Container(
@@ -72,7 +82,7 @@ class StoryPage extends StatelessWidget {
                 elevation: 0,
                 leading: IconButton(
                   icon: Icon(
-                    Icons.arrow_back,
+                    Icons.arrow_forward,
                     color: context.theme.colorScheme.secondary,
                   ),
                   onPressed: () {
@@ -128,9 +138,9 @@ class StoryPage extends StatelessWidget {
                                           children: <Widget>[
                                             Padding(
                                               padding: const EdgeInsets.only(
-                                                  left: 8.0),
+                                                  right: 20.0),
                                               child: Text(
-                                                'chapters',
+                                                'chapters'.tr,
                                                 style: Get
                                                     .theme.textTheme.bodyLarge,
                                               ),

@@ -28,7 +28,7 @@ class _StorySliderState extends State<StorySlider> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text("Latest Added sotredStories",
+                    child: Text("Recently Added".tr,
                         style: theme.textTheme.headlineSmall),
                   ),
                 ],

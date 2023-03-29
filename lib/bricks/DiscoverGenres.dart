@@ -21,7 +21,7 @@ class DiscoverGenres extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('Discover',
+                    child: Text('Discover'.tr,
                         style: context.theme.textTheme.headlineSmall),
                   ),
                 ],

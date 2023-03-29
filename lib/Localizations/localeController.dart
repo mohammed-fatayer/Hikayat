@@ -2,10 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/main.dart';
 
-
 class LocaleController {
   Locale initlanguage = sharedpref!.getString("lang") == null
-      ? Get.deviceLocale!
+      ? const Locale("ar")
       : Locale(sharedpref!.getString("lang")!);
 
   void changelang(String lang) {
