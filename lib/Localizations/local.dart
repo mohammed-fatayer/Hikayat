@@ -21,7 +21,7 @@ class MyLocale implements Translations {
           "dark mode": "الوضع الليلي",
           "light mode": "الوضع النهاري",
           "purple mode": "الوضع البنفسجي",
-          "Overview": "نبذة عن القصة",
+          "Overview": "نبذة ",
           "read": "اقرأ",
           "read more": "اقرأ المزيد",
           "read less": "اقرأ اقل",

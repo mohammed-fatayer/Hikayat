@@ -6,11 +6,14 @@ import 'package:hikayat/model/DataClass.dart';
 
 class ParticularGenreStories extends StatelessWidget {
   DataController controller = Get.find();
-  ParticularGenreStories({super.key});
-
+  final Category category;
+  ParticularGenreStories({super.key, required this.category});
+  
   @override
   Widget build(BuildContext context) {
-    List<Story> stories = controller.stories;
+    List<Story> stories = controller.stories
+        .where((element) => element.genre == category.title)
+        .toList();
     return Container(
       // height: Get.height * 0.8,
       // width: Get.width*0.9,

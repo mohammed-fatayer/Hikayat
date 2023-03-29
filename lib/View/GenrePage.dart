@@ -176,7 +176,7 @@ class GenrePage extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                        ParticularGenreStories()
+                                        ParticularGenreStories(category: category,)
                                       ],
                                     ),
                                   ),

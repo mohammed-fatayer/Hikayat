@@ -7,6 +7,7 @@ class DataController extends GetxController {
   RxList<Story> stories = <Story>[].obs;
   RxList<Chapter> chapters = <Chapter>[].obs;
 
+
   final docRef = FirebaseFirestore.instance.collection("Categories");
 
   Future fetchCategories() async {
