@@ -8,20 +8,21 @@ import 'package:hikayat/Controllers/DataController.dart';
 import 'package:hikayat/Controllers/StoryController.dart';
 
 
-class MyBinding extends Bindings {
+class MyBinding extends Binding {
   @override
-  void dependencies() {
-    
-    Get.lazyPut(() =>MainController(),fenix: true);
+  List<Bind> dependencies() {
+   return [
+       Bind.lazyPut(() =>MainController(),fenix: true),
     // Get.lazyPut(() => MainController(),fenix:true);
     // Get.lazyPut(() => AdminController(),fenix:true);
     // Get.lazyPut(() => GifsController(),fenix:true);
     // Get.put<AuthController>(AuthController(), permanent: true);
-    Get.lazyPut(() => GenreController(category: Get.arguments),fenix:true);
-    Get.lazyPut(() => StoryController(),fenix:true);
-    Get.lazyPut(() => ChapterController(),fenix:true);
-    Get.put<DataController>(DataController(), permanent: true);
-
-    // Get.lazyPut(() =>ScrollController());
+    Bind.lazyPut(() => GenreController(category: Get.arguments),fenix:true),
+    Bind.lazyPut(() => StoryController(),fenix:true),
+    Bind.lazyPut(() => ChapterController(),fenix:true),
+    Bind.put<DataController>(DataController(), permanent: true),
+   ];
   }
+
+
 }

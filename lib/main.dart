@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         locale: controller.initlanguage,
         fallbackLocale: const Locale("ar"),
         translations: MyLocale(),
-        initialBinding: MyBinding(),
+        binds: MyBinding().dependencies(),
         theme: theme == "light"
             ? Themes.customLightTheme
             : theme == "dark" ? Themes.customDarkTheme 

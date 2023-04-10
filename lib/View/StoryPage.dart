@@ -161,7 +161,7 @@ class StoryPage extends StatelessWidget {
                       ),
                       Positioned(
                         top: 0,
-                        left: Get.width / 2,
+                        left: Get.width / 2 - 50,
                         child: SizedBox(
                           width: 100,
                           height: 150,
