@@ -5,6 +5,7 @@ import 'package:hikayat/model/DataClass.dart';
 class DataController extends GetxController {
   RxList<Category> categories = <Category>[].obs;
   RxList<Story> stories = <Story>[].obs;
+  RxList<Story> Categoriestories = <Story>[].obs;
   RxList<Story> sortedStories = <Story>[].obs;
 
   RxList<Chapter> chapters = <Chapter>[].obs;
@@ -45,6 +46,7 @@ class DataController extends GetxController {
           genre: story["genre"],
           timestamp: story["timestamp"],
           imageRef: story["imageRef"],
+          filter: story["filter"],
           docSnapshot: story,
         ));
       }
@@ -71,9 +73,12 @@ class DataController extends GetxController {
         genre: doc["genre"],
         timestamp: doc["timestamp"],
         imageRef: doc["imageRef"],
+        filter: doc["filter"],
         docSnapshot: doc,
       ));
     }
+    Categoriestories.value = data;
+    update();
     return data;
   }
 
@@ -131,7 +136,7 @@ class DataController extends GetxController {
     // Build the query to fetch the next set of documents
     Query query = FirebaseFirestore.instance
         .collectionGroup("stories")
-        .orderBy("timestamp",descending: true)
+        .orderBy("timestamp", descending: true)
         .limit(5);
 
     if (lastDoc != null) {
@@ -162,10 +167,11 @@ class DataController extends GetxController {
           genre: story["genre"],
           timestamp: story["timestamp"],
           imageRef: story["imageRef"],
+          filter: story["filter"],
           docSnapshot: story, // save the document snapshot for pagination
         ));
       }
-      
+
       sortedStories.value += data;
       isloading = false;
 
@@ -214,6 +220,7 @@ class DataController extends GetxController {
           genre: story["genre"],
           timestamp: story["timestamp"],
           imageRef: story["imageRef"],
+          filter: story["filter"],
           docSnapshot: story, // save the document snapshot for pagination
         ));
       }

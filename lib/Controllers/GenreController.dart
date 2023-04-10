@@ -14,6 +14,7 @@ class GenreController extends GetxController {
   void onInit() async {
    
     await dataController.fetchStories(category);
+    
     super.onInit();
   }  
 }

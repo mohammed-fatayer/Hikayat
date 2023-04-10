@@ -27,9 +27,11 @@ class Story {
   final String imageRef;
   final Timestamp? timestamp;
   List<Chapter> chapters = [];
-    final DocumentSnapshot? docSnapshot;
+  final DocumentSnapshot? docSnapshot;
+  final List filter;
 
   Story({
+    required this.filter,
     required this.timestamp,
     required this.writer,
     required this.title,

@@ -3,9 +3,9 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hikayat/Controllers/ChapterController.dart';
 import 'package:hikayat/Controllers/DataController.dart';
 import 'package:hikayat/bricks/ChaptersListWidget.dart';
+import 'package:hikayat/bricks/FilterRowWidget.dart';
 import 'package:hikayat/model/DataClass.dart';
 
 class StoryPage extends StatelessWidget {
@@ -112,20 +112,12 @@ class StoryPage extends StatelessWidget {
                                   padding: const EdgeInsets.only(top: 80.0),
                                   child: Padding(
                                     padding: const EdgeInsets.all(60.0),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          story.title,
-                                          style:
-                                              context.theme.textTheme.headlineSmall,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ],
+                                    child: Text(
+                                      story.title,
+                                      style:
+                                          context.theme.textTheme.headlineSmall,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                 ),
@@ -133,7 +125,9 @@ class StoryPage extends StatelessWidget {
                                   child: SingleChildScrollView(
                                     physics: const BouncingScrollPhysics(),
                                     child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: <Widget>[
+                                       FilterRowWidget(story: story),
                                         Row(
                                           children: <Widget>[
                                             Padding(
