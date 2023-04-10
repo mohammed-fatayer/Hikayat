@@ -8,14 +8,13 @@ import 'package:hikayat/bricks/StorySlider.dart';
 import 'package:hikayat/searchDelegate/searchStories.dart';
 
 class MainPage extends StatelessWidget {
+
   MainController controller = Get.find();
-   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(MainController());
-
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: context.theme.primaryColor,
@@ -23,7 +22,6 @@ class MainPage extends StatelessWidget {
         child: DrawerWidget(),
       ),
       appBar: AppBar(
-        
         leading: IconButton(
           icon: Icon(
             Icons.settings,
@@ -45,7 +43,7 @@ class MainPage extends StatelessWidget {
             icon: const Icon(Icons.search),
             onPressed: () async {
               // show search delegate in getx
-            await  showSearch(context: context, delegate: SearchStories());
+              await showSearch(context: context, delegate: SearchStories());
             },
           )
         ],
@@ -57,6 +55,7 @@ class MainPage extends StatelessWidget {
         init: controller,
         builder: (controller) {
           return ListView(
+            controller: controller.MainPageGridSliderScrollController,
             physics: const ClampingScrollPhysics(),
             children: const <Widget>[
               DiscoverGenres(),

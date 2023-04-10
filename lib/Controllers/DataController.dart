@@ -5,8 +5,11 @@ import 'package:hikayat/model/DataClass.dart';
 class DataController extends GetxController {
   RxList<Category> categories = <Category>[].obs;
   RxList<Story> stories = <Story>[].obs;
-  RxList<Chapter> chapters = <Chapter>[].obs;
+  RxList<Story> sortedStories = <Story>[].obs;
 
+  RxList<Chapter> chapters = <Chapter>[].obs;
+  bool isloading = false;
+  bool isloadingmore = true;
 
   final docRef = FirebaseFirestore.instance.collection("Categories");
 
@@ -42,6 +45,7 @@ class DataController extends GetxController {
           genre: story["genre"],
           timestamp: story["timestamp"],
           imageRef: story["imageRef"],
+          docSnapshot: story,
         ));
       }
     }).catchError((e) {
@@ -67,6 +71,7 @@ class DataController extends GetxController {
         genre: doc["genre"],
         timestamp: doc["timestamp"],
         imageRef: doc["imageRef"],
+        docSnapshot: doc,
       ));
     }
     return data;
@@ -75,17 +80,12 @@ class DataController extends GetxController {
   List<Story> sortStoriesByDate() {
     List<Story> list = List<Story>.from(stories);
     if (stories.isNotEmpty) {
-      list.sort((a, b) => b.timestamp!.toDate().compareTo(a.timestamp!.toDate()));
+      list.sort(
+          (a, b) => b.timestamp!.toDate().compareTo(a.timestamp!.toDate()));
       return list;
     } else {
       return list;
     }
-  }
-
-  List<Story> sortStoriesByRandom() {
-    List<Story> list = List<Story>.from(stories);
-    list.shuffle();
-    return list;
   }
 
   Future fetchChapters(Story story) async {
@@ -104,7 +104,6 @@ class DataController extends GetxController {
         chapterid: doc.id,
         timestamp: doc["timestamp"],
       ));
-      
     }
     chapters.value = data;
     update();
@@ -119,5 +118,111 @@ class DataController extends GetxController {
       }
     }
     return data;
+  }
+
+  Future fetchStoriesByDate() async {
+    List<Story> data = [];
+
+    // Get the last document from the current data set
+    DocumentSnapshot<Object?>? lastDoc = sortedStories.value.isNotEmpty
+        ? sortedStories.value.last.docSnapshot
+        : null;
+
+    // Build the query to fetch the next set of documents
+    Query query = FirebaseFirestore.instance
+        .collectionGroup("stories")
+        .orderBy("timestamp",descending: true)
+        .limit(5);
+
+    if (lastDoc != null) {
+      query = query.startAfterDocument(lastDoc);
+    }
+
+    // Fetch the documents and add them to the data list
+    await query.get().then((value) {
+      if (value.docs.isEmpty) {
+        print("no more opjects");
+        update();
+        isloadingmore = false;
+        return;
+      }
+      if (isloading == true) {
+        print("already loading");
+
+        return;
+      }
+      isloading = true;
+      for (var story in value.docs) {
+        data.add(Story(
+          title: story.id,
+          writer: story["writer"],
+          discription: story["description"],
+          imageUrl: story["image"],
+          chapters: [],
+          genre: story["genre"],
+          timestamp: story["timestamp"],
+          imageRef: story["imageRef"],
+          docSnapshot: story, // save the document snapshot for pagination
+        ));
+      }
+      
+      sortedStories.value += data;
+      isloading = false;
+
+      update();
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  Future fetchMoreStories() async {
+    List<Story> data = [];
+
+    // Get the last document from the current data set
+    DocumentSnapshot<Object?>? lastDoc =
+        stories.value.isNotEmpty ? stories.value.last.docSnapshot : null;
+
+    // Build the query to fetch the next set of documents
+    Query query =
+        FirebaseFirestore.instance.collectionGroup("stories").limit(5);
+
+    if (lastDoc != null) {
+      query = query.startAfterDocument(lastDoc);
+    }
+
+    // Fetch the documents and add them to the data list
+    await query.get().then((value) {
+      if (value.docs.isEmpty) {
+        print("no more opjects");
+        update();
+        isloadingmore = false;
+        return;
+      }
+      if (isloading == true) {
+        print("already loading");
+
+        return;
+      }
+      isloading = true;
+      for (var story in value.docs) {
+        data.add(Story(
+          title: story.id,
+          writer: story["writer"],
+          discription: story["description"],
+          imageUrl: story["image"],
+          chapters: [],
+          genre: story["genre"],
+          timestamp: story["timestamp"],
+          imageRef: story["imageRef"],
+          docSnapshot: story, // save the document snapshot for pagination
+        ));
+      }
+      stories.value += data;
+      isloading = false;
+
+      update();
+    }).catchError((e) {
+      print(e);
+    });
   }
 }

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Controllers/DataController.dart';
+import 'package:hikayat/Controllers/MainController.dart';
 import 'package:hikayat/model/DataClass.dart';
 
 class StorySlider extends StatefulWidget {
@@ -13,6 +14,7 @@ class StorySlider extends StatefulWidget {
 
 class _StorySliderState extends State<StorySlider> {
   DataController controller = Get.find();
+  MainController mainController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class _StorySliderState extends State<StorySlider> {
     return GetBuilder<DataController>(
         init: controller,
         builder: (context) {
-          List<Story> sotredStories = controller.sortStoriesByDate();
+          List<Story> sotredStories = controller.sortedStories;
           return Column(
             children: <Widget>[
               Row(
@@ -39,11 +41,20 @@ class _StorySliderState extends State<StorySlider> {
                 child: sotredStories.isEmpty
                     ? const Center(child: CircularProgressIndicator())
                     : ListView.builder(
+                        controller:mainController.MainPageLatestSliderScrollController ,
                         physics: const BouncingScrollPhysics(),
-                        itemCount: sotredStories.length,
+                        itemCount: sotredStories.length+1,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (BuildContext context, int index) {
-                          return Padding(
+                          if (index == sotredStories.length) {
+                            if (controller.isloadingmore == false) {
+                              return const Center(child: SizedBox());
+                            }
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                          else{
+                            return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: InkWell(
                               onTap: () {
@@ -86,7 +97,10 @@ class _StorySliderState extends State<StorySlider> {
                               ),
                             ),
                           );
-                        },
+                        }
+                         
+                            
+                          }
                       ),
               ),
             ],

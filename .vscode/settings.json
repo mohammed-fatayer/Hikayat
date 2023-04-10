@@ -3,5 +3,8 @@
     "cmake.sourceDirectory": "${workspaceFolder}/windows/flutter",
     "cSpell.words": [
         "sharedpref"
+    ],
+    "cSpell.enableFiletypes": [
+        "dart"
     ]
 }

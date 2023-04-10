@@ -27,6 +27,7 @@ class Story {
   final String imageRef;
   final Timestamp? timestamp;
   List<Chapter> chapters = [];
+    final DocumentSnapshot? docSnapshot;
 
   Story({
     required this.timestamp,
@@ -37,6 +38,7 @@ class Story {
     required this.chapters,
     required this.genre,
     required this.imageRef,
+    required this.docSnapshot,
   });
 }
 
