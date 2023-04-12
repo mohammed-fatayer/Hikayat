@@ -7,7 +7,7 @@ class DataController extends GetxController {
   RxList<Story> stories = <Story>[].obs;
   RxList<Story> Categoriestories = <Story>[].obs;
   RxList<Story> sortedStories = <Story>[].obs;
-
+  RxList<Story> searchResultStories = <Story>[].obs;
   RxList<Chapter> chapters = <Chapter>[].obs;
   bool isloading = false;
   bool isloadingmore = true;
@@ -33,14 +33,14 @@ class DataController extends GetxController {
   Future fetchAllStories() async {
     List<Story> data = [];
     await FirebaseFirestore.instance
-        .collectionGroup("stories")
+        .collectionGroup("stories").limit(25)
         .get()
         .then((value) {
       for (var story in value.docs) {
         data.add(Story(
-          title: story.id,
+          title: story["title"],
           writer: story["writer"],
-          discription: story["description"],
+          description: story["description"],
           imageUrl: story["image"],
           chapters: [],
           genre: story["genre"],
@@ -65,9 +65,9 @@ class DataController extends GetxController {
     List<Story> data = [];
     for (var doc in refstories.docs) {
       data.add(Story(
-        title: doc.id,
+        title: doc["title"],
         writer: doc["writer"],
-        discription: doc["description"],
+        description: doc["description"],
         imageUrl: doc["image"],
         chapters: [],
         genre: doc["genre"],
@@ -115,14 +115,32 @@ class DataController extends GetxController {
     return data;
   }
 
-  List<Story> searchDelegateStories(String query) {
+  Future searchDelegateStories(String query) async{
     List<Story> data = [];
-    for (var story in stories) {
-      if (story.title.toLowerCase().contains(query.toLowerCase())) {
-        data.add(story);
+     await FirebaseFirestore.instance
+        .collectionGroup("stories").where("title", isGreaterThanOrEqualTo: query).orderBy("title",descending: false ).limit(5)
+        .get().then((value) {
+      for (var doc in value.docs) {
+        data.add(Story(
+          title: doc["title"],
+          writer: doc["writer"],
+          description: doc["description"],
+          imageUrl: doc["image"],
+          chapters: [],
+          genre: doc["genre"],
+          timestamp: doc["timestamp"],
+          imageRef: doc["imageRef"],
+          filter: doc["filter"],
+          docSnapshot: doc,
+        ));
       }
-    }
-    return data;
+      searchResultStories.value = data;
+      
+    }).catchError((e) {
+       print(e);
+      
+     
+    });
   }
 
   Future fetchStoriesByDate() async {
@@ -159,9 +177,9 @@ class DataController extends GetxController {
       isloading = true;
       for (var story in value.docs) {
         data.add(Story(
-          title: story.id,
+          title: story["title"],
           writer: story["writer"],
-          discription: story["description"],
+          description: story["description"],
           imageUrl: story["image"],
           chapters: [],
           genre: story["genre"],
@@ -212,9 +230,9 @@ class DataController extends GetxController {
       isloading = true;
       for (var story in value.docs) {
         data.add(Story(
-          title: story.id,
+          title: story["title"],
           writer: story["writer"],
-          discription: story["description"],
+          description: story["description"],
           imageUrl: story["image"],
           chapters: [],
           genre: story["genre"],

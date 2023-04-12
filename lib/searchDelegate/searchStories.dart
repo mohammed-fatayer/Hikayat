@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Controllers/DataController.dart';
 import 'package:hikayat/bricks/SearchResultWidget.dart';
-import 'package:hikayat/theme/theme.dart';
 
 class SearchStories extends SearchDelegate {
   final DataController controller = Get.find();
@@ -50,31 +49,39 @@ class SearchStories extends SearchDelegate {
         close(context, null);
       },
       icon: const Icon(Icons.arrow_back),
-      color:Colors.black12,
+      color: Colors.black12,
     );
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    return GetBuilder<DataController>(
-      builder: (controller) {
-        return Scaffold(
-          body: SearchDelegateResults(
+    if (query.isEmpty) {
+      return Container();
+    } else {
+      return GetBuilder<DataController>(
+        builder: (controller) {
+          return SearchDelegateResults(
             query: query,
-          ),
-        );
-      },
-    );
+          );
+        },
+      );
+    }
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return GetBuilder<DataController>(
-      builder: (controller) {
-        return SearchDelegateResults(
-          query: query,
-        );
-      },
-    );
+    if (query.length < 3) {
+      return Container();
+    } else {
+      
+     
+      return GetBuilder<DataController>(
+        builder: (controller) {
+          return SearchDelegateResults(
+            query: query,
+          );
+        },
+      );
+    }
   }
 }

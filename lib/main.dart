@@ -42,11 +42,12 @@ class MyApp extends StatelessWidget {
         fallbackLocale: const Locale("ar"),
         translations: MyLocale(),
         binds: MyBinding().dependencies(),
-        theme: theme == "light"
-            ? Themes.customLightTheme
-            : theme == "dark" ? Themes.customDarkTheme 
-            : Themes.customPurpleTheme,
-        initialRoute: showOnBoarding ? "/onboarding" : "/",
+        theme: theme == "purple"
+            ? Themes.customPurpleTheme
+            : theme == "dark"
+                ? Themes.customDarkTheme
+                : Themes.customLightTheme,
+        // initialRoute: showOnBoarding ? "/onboarding" : "/",
         getPages: [
           GetPage(
             name: "/",
@@ -59,18 +60,24 @@ class MyApp extends StatelessWidget {
                       : UpgradeDialogStyle.cupertino,
                 ),
                 child: MainPage()),
+            transition: Transition.noTransition,
           ),
-          GetPage(name: "/genre", page: () => GenrePage()),
-          GetPage(name: "/onboarding", page: () => const OnboardingPage1()),
           GetPage(
-            name: "/story",
-            page: () => StoryPage(),
-          ),
+              name: "/genre",
+              page: () => GenrePage(),
+              transition: Transition.noTransition),
+          GetPage(
+              name: "/onboarding",
+              page: () => const OnboardingPage1(),
+              transition: Transition.noTransition),
+          GetPage(
+              name: "/story",
+              page: () => StoryPage(),
+              transition: Transition.noTransition),
           GetPage(
               name: "/chapter",
-              page: () => ChapterPage(
-                    
-                  )),
+              page: () => ChapterPage(),
+              transition: Transition.noTransition),
         ]);
   }
 }

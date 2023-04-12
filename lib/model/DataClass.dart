@@ -21,7 +21,7 @@ class Category {
 class Story {
   final String title;
   final String writer;
-  final String discription;
+  final String description;
   final String imageUrl;
   final String genre;
   final String imageRef;
@@ -35,7 +35,7 @@ class Story {
     required this.timestamp,
     required this.writer,
     required this.title,
-    required this.discription,
+    required this.description,
     required this.imageUrl,
     required this.chapters,
     required this.genre,

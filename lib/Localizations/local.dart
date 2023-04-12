@@ -46,6 +46,7 @@ class MyLocale implements Translations {
           "SansArabic": "سانس عربي",
           "Lalezar": "لاليزار",
           "Add Background Image": "اضف صورة خلفية",
+          "Writer": "الكاتب",
           
         },
       };

@@ -111,7 +111,7 @@ class StoryPage extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 80.0),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(60.0),
+                                    padding: const EdgeInsets.only(top: 60.0,bottom: 20),
                                     child: Text(
                                       story.title,
                                       style:
@@ -125,9 +125,49 @@ class StoryPage extends StatelessWidget {
                                   child: SingleChildScrollView(
                                     physics: const BouncingScrollPhysics(),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                     
                                       children: <Widget>[
-                                       FilterRowWidget(story: story),
+                                        FilterRowWidget(story: story),
+                                         Row(
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.all(
+                                                   20.0),
+                                              child: Text(
+                                                'Writer'.tr,
+                                                style: Get
+                                                    .theme.textTheme.bodyLarge,
+                                              ),
+                                            ),
+                                            Text(
+                                              story.writer,
+                                              style: Get
+                                                  .theme.textTheme.bodyLarge,
+                                            ),
+                                          ],
+                                        ),
+
+                                        Row(
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 20.0),
+                                              child: Text(
+                                                'Overview'.tr,
+                                                style: Get
+                                                    .theme.textTheme.bodyLarge,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            story.description,
+                                            style:
+                                                Get.theme.textTheme.bodySmall,
+                                          ),
+                                        ),
                                         Row(
                                           children: <Widget>[
                                             Padding(
