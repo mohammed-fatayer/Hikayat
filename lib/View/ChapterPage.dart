@@ -10,14 +10,16 @@ class ChapterPage extends StatelessWidget {
   ChapterController controller = Get.find();
   DataController dataController = Get.find();
   Chapter? chapter;
-  String? storyname;
+
+  Story? story;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  ChapterPage({super.key, this.chapter, this.storyname});
+  ChapterPage({super.key, this.chapter, this.story});
+  DataController datacontroller = Get.find();
 
   @override
   Widget build(BuildContext context) {
     chapter = Get.arguments["chapter"];
-    storyname = Get.arguments["storyname"];
+    story = Get.arguments["story"];
     return Scaffold(
       drawer: DrawerWidget(),
       body: GetBuilder<MainController>(
@@ -58,7 +60,7 @@ class ChapterPage extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 title: Text(
-                  storyname!,
+                  story!.title,
                   style: context.theme.textTheme.headlineSmall,
                 ),
               ),
@@ -78,9 +80,90 @@ class ChapterPage extends StatelessWidget {
                                   .copyWith(
                                 color: controller.showBackgroundImage == true
                                     ? const Color.fromARGB(255, 17, 17, 17)
-                                    :controller.chaptertexttheme.value.bodyLarge!.color,
+                                    : controller.chaptertexttheme.value
+                                        .bodyLarge!.color,
                               ),
                             ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              //FIXME: fix navigation to next and previous chapter method
+                              //tow icon button for next and previous chapter
+                              Expanded(
+                                child: IconButton(
+                                  onPressed: () {
+                                    if (chapter!.chapterNumber ==
+                                        dataController.chapters.length) {
+                                      Get.rawSnackbar(
+                                        
+                                        message: "This is the last chapter".tr,
+                                        backgroundColor: const Color.fromARGB(
+                                            255, 63, 63, 63),
+                                        duration: const Duration(seconds: 2),
+                                      );
+                                    } else {
+                                      int newchapternumber =
+                                          chapter!.chapterNumber + 1;
+                                      Chapter newchapter = dataController
+                                          .chapters
+                                          .firstWhere((element) =>
+                                              element.chapterNumber ==
+                                              newchapternumber);
+                                      Get.back();
+                                      Future.delayed(
+                                          const Duration(milliseconds: 200),
+                                          () {
+                                        Get.toNamed("/chapter", arguments: {
+                                          "chapter": newchapter,
+                                          "story": story,
+                                        });
+                                      });
+                                    }
+                                  },
+                                  icon: Icon(
+                                    Icons.arrow_back,
+                                    color: Get.theme.colorScheme.secondary,
+                                  ),
+                                ),
+                              ),
+
+                              Expanded(
+                                child: IconButton(
+                                  onPressed: () {
+                                    if (chapter!.chapterNumber <= 1) {
+                                      Get.rawSnackbar(
+                                        message: "This is the first chapter".tr,
+                                        backgroundColor: const Color.fromARGB(
+                                            255, 63, 63, 63),
+                                        duration: const Duration(seconds: 2),
+                                      );
+                                    } else {
+                                      int newchapternumber =
+                                          chapter!.chapterNumber - 1;
+                                      Chapter newchapter = dataController
+                                          .chapters
+                                          .firstWhere((element) =>
+                                              element.chapterNumber ==
+                                              newchapternumber);
+                                      Get.back();
+                                      Future.delayed(
+                                          const Duration(milliseconds: 200),
+                                          () {
+                                        Get.toNamed("/chapter", arguments: {
+                                          "chapter": newchapter,
+                                          "story": story,
+                                        });
+                                      });
+                                    }
+                                  },
+                                  icon: Icon(
+                                    Icons.arrow_forward,
+                                    color: Get.theme.colorScheme.secondary,
+                                  ),
+                                ),
+                              ),
+                            ],
                           )
                         ],
                       )),

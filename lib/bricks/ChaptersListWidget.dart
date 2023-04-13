@@ -24,8 +24,8 @@ class ChaptersListWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 100.0),
                       child: Text(
                         "Oops! couldn't find any chapters".tr,
-                        style: const TextStyle(
-                            color: Colors.black,
+                        style: TextStyle(
+                            color: Get.theme.textTheme.bodyLarge!.color,
                             fontFamily: "Roboto",
                             fontSize: 25),
                       ),
@@ -49,8 +49,8 @@ class ChaptersListWidget extends StatelessWidget {
                               onTap: () {
                                 String storyname = story.title;
                                 Get.toNamed("/chapter", arguments: {
-                                  "storyname": storyname,
-                                  "chapter": contoller.chapters[index]
+                                  "chapter": contoller.chapters[index],
+                                  "story": story,
                                 });
                               },
                               child: Column(

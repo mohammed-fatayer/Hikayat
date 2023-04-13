@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
@@ -6,22 +7,34 @@ import 'package:hikayat/View/ChapterPage.dart';
 import 'package:hikayat/View/GenrePage.dart';
 import 'package:hikayat/View/StoryPage.dart';
 import 'package:hikayat/bricks/Onboarding.dart';
+import 'package:hikayat/firebase_options.dart';
 import 'package:hikayat/utils/mybindings.dart';
 import 'package:hikayat/theme/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Localizations/localeController.dart';
-import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'View/MainPage.dart';
 import 'package:upgrader/upgrader.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 SharedPreferences? sharedpref;
 bool showOnBoarding = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
   sharedpref = await SharedPreferences.getInstance();
+  String? token = await messaging.getToken();
+  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  FirebaseAnalyticsObserver(analytics: analytics);
+
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+
   showOnBoarding = sharedpref?.getBool("firstopen") ?? true;
 
   runApp(const MyApp());
@@ -33,9 +46,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+  
     LocaleController controller = Get.put(LocaleController());
     String? theme = sharedpref!.getString("theme");
     return GetMaterialApp(
+    
         debugShowCheckedModeBanner: false,
         title: 'Hikayat',
         locale: controller.initlanguage,
@@ -73,7 +88,8 @@ class MyApp extends StatelessWidget {
           GetPage(
               name: "/story",
               page: () => StoryPage(),
-              transition: Transition.noTransition),
+              transition: Transition.noTransition,
+              preventDuplicates: false),
           GetPage(
               name: "/chapter",
               page: () => ChapterPage(),

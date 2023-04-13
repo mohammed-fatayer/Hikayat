@@ -6,17 +6,11 @@ import 'package:hikayat/Controllers/MainController.dart';
 
 import 'package:hikayat/model/DataClass.dart';
 
-class StoryGridSlide extends StatefulWidget {
-  const StoryGridSlide({super.key});
+class StoryGridSlide extends StatelessWidget {
+   StoryGridSlide({super.key});
 
-  @override
-  State<StoryGridSlide> createState() => _StoryGridSlideState();
-}
-
-class _StoryGridSlideState extends State<StoryGridSlide> {
   DataController controller = Get.find();
 
-  
   @override
   Widget build(BuildContext context) {
     ThemeData theme = context.theme;
@@ -52,7 +46,7 @@ class _StoryGridSlideState extends State<StoryGridSlide> {
                         itemCount: stories.length + 1,
                         itemBuilder: (BuildContext context, int index) {
                           if (stories.length == index ) {
-                            if (controller.isloadingmore ==false) {
+                            if (controller.isloadingmoreForMainGridSlider ==false) {
                               return const Center(
                                   child: SizedBox());
                             }

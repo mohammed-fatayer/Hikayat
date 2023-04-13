@@ -7,10 +7,13 @@ class DataController extends GetxController {
   RxList<Story> stories = <Story>[].obs;
   RxList<Story> Categoriestories = <Story>[].obs;
   RxList<Story> sortedStories = <Story>[].obs;
+  RxList<Story> FilteredStories = <Story>[].obs;
   RxList<Story> searchResultStories = <Story>[].obs;
   RxList<Chapter> chapters = <Chapter>[].obs;
   bool isloading = false;
-  bool isloadingmore = true;
+  bool isloadingmoreForFilterSlider = true;
+  bool isloadingmoreForMainDateSlider = true;
+  bool isloadingmoreForMainGridSlider = true;
 
   final docRef = FirebaseFirestore.instance.collection("Categories");
 
@@ -30,34 +33,34 @@ class DataController extends GetxController {
     update();
   }
 
-  Future fetchAllStories() async {
-    List<Story> data = [];
-    await FirebaseFirestore.instance
-        .collectionGroup("stories").limit(25)
-        .get()
-        .then((value) {
-      for (var story in value.docs) {
-        data.add(Story(
-          title: story["title"],
-          writer: story["writer"],
-          description: story["description"],
-          imageUrl: story["image"],
-          chapters: [],
-          genre: story["genre"],
-          timestamp: story["timestamp"],
-          imageRef: story["imageRef"],
-          filter: story["filter"],
-          docSnapshot: story,
-        ));
-      }
-    }).catchError((e) {
-      print(e);
-    });
+  // Future fetchAllStories() async {
+  //   List<Story> data = [];
+  //   await FirebaseFirestore.instance
+  //       .collectionGroup("stories").limit(25)
+  //       .get()
+  //       .then((value) {
+  //     for (var story in value.docs) {
+  //       data.add(Story(
+  //         title: story["title"],
+  //         writer: story["writer"],
+  //         description: story["description"],
+  //         imageUrl: story["image"],
+  //         chapters: [],
+  //         genre: story["genre"],
+  //         timestamp: story["timestamp"],
+  //         imageRef: story["imageRef"],
+  //         filter: story["filter"],
+  //         docSnapshot: story,
+  //       ));
+  //     }
+  //   }).catchError((e) {
+  //     print(e);
+  //   });
 
-    stories.value = data;
+  //   stories.value = data;
 
-    update();
-  }
+  //   update();
+  // }
 
   Future<List<Story>> fetchStories(Category category) async {
     QuerySnapshot<Map<String, dynamic>> refstories =
@@ -99,6 +102,7 @@ class DataController extends GetxController {
         .collection("stories")
         .doc(story.title)
         .collection("chapters")
+        .orderBy("timestamp", descending: true)
         .get();
     List<Chapter> data = [];
     for (var doc in refchapters.docs) {
@@ -115,11 +119,76 @@ class DataController extends GetxController {
     return data;
   }
 
-  Future searchDelegateStories(String query) async{
+  Future fetchStoriesByFilter(String filter) async {
     List<Story> data = [];
-     await FirebaseFirestore.instance
-        .collectionGroup("stories").where("title", isGreaterThanOrEqualTo: query).orderBy("title",descending: false ).limit(5)
-        .get().then((value) {
+
+     
+ 
+    // Get the last document from the current data set
+    DocumentSnapshot<Object?>? lastDoc = FilteredStories.value.isNotEmpty
+        ? FilteredStories.value.last.docSnapshot
+        : null;
+
+    Query query = FirebaseFirestore.instance
+        .collectionGroup("stories")
+        .where("filter", arrayContains: filter);
+
+    if (lastDoc != null) {
+      query = query.startAfterDocument(lastDoc);
+    }
+
+    await query.limit(5).get().then((value) {
+      
+        if (value.docs.isEmpty) {
+        print("no more opjects");
+        update();
+        isloadingmoreForFilterSlider = false;
+        return;
+      }
+      if (isloading == true) {
+        print("already loading");
+
+        return;
+      } 
+         isloading = true;
+        for (var story in value.docs) {
+          data.add(Story(
+            title: story["title"],
+            writer: story["writer"],
+            description: story["description"],
+            imageUrl: story["image"],
+            chapters: [],
+            genre: story["genre"],
+            timestamp: story["timestamp"],
+            imageRef: story["imageRef"],
+            filter: story["filter"],
+            docSnapshot: story,
+          ));
+        }
+      
+    }).catchError((e) {
+      print(e);
+    });
+    //TODO:add  loading more data circular progress indicator
+    if (data.isEmpty) {
+      print("No more data");
+    }
+
+    isloading = false;
+    FilteredStories.value += data;
+    update();
+  
+  }
+
+  Future searchDelegateStories(String query) async {
+    List<Story> data = [];
+    await FirebaseFirestore.instance
+        .collectionGroup("stories")
+        .where("title", isGreaterThanOrEqualTo: query)
+        .orderBy("title", descending: false)
+        .limit(5)
+        .get()
+        .then((value) {
       for (var doc in value.docs) {
         data.add(Story(
           title: doc["title"],
@@ -135,11 +204,8 @@ class DataController extends GetxController {
         ));
       }
       searchResultStories.value = data;
-      
     }).catchError((e) {
-       print(e);
-      
-     
+      print(e);
     });
   }
 
@@ -166,7 +232,7 @@ class DataController extends GetxController {
       if (value.docs.isEmpty) {
         print("no more opjects");
         update();
-        isloadingmore = false;
+        isloadingmoreForMainDateSlider = false;
         return;
       }
       if (isloading == true) {
@@ -219,7 +285,7 @@ class DataController extends GetxController {
       if (value.docs.isEmpty) {
         print("no more opjects");
         update();
-        isloadingmore = false;
+        isloadingmoreForMainGridSlider = false;
         return;
       }
       if (isloading == true) {

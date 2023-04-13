@@ -47,7 +47,7 @@ class _StorySliderState extends State<StorySlider> {
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (BuildContext context, int index) {
                           if (index == sotredStories.length) {
-                            if (controller.isloadingmore == false) {
+                            if (controller.isloadingmoreForMainDateSlider == false) {
                               return const Center(child: SizedBox());
                             }
                             return const Center(

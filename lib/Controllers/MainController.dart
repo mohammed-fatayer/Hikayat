@@ -18,6 +18,7 @@ class MainController extends GetxController {
   @override
   void onInit() async {
     dataController = Get.find();
+    changeTextTheme();
        MainPageGridSliderScrollController.addListener(() async{
       if (MainPageGridSliderScrollController.offset ==
           MainPageGridSliderScrollController.position.maxScrollExtent) {
@@ -50,7 +51,7 @@ class MainController extends GetxController {
   }
 
   Rx<TextTheme> changeTextTheme() {
-    currenttheme = sharedpref!.getString("theme");
+    currenttheme = sharedpref!.getString("theme") ?? "light";
     chaptertexttheme.value = Get.theme.textTheme.copyWith(
       bodyLarge: Get.theme.textTheme.bodyLarge!.copyWith(
           color: currenttheme == "light"

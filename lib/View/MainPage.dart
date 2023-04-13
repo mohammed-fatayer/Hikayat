@@ -8,7 +8,6 @@ import 'package:hikayat/bricks/StorySlider.dart';
 import 'package:hikayat/searchDelegate/searchStories.dart';
 
 class MainPage extends StatelessWidget {
-
   MainController controller = Get.find();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   MainPage({super.key});
@@ -57,9 +56,9 @@ class MainPage extends StatelessWidget {
           return ListView(
             controller: controller.MainPageGridSliderScrollController,
             physics: const ClampingScrollPhysics(),
-            children: const <Widget>[
-              DiscoverGenres(),
-              StorySlider(),
+            children: <Widget>[
+              const DiscoverGenres(),
+              const StorySlider(),
               StoryGridSlide(),
 
               // StorySlider(),

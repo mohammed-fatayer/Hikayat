@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hikayat/Controllers/MainController.dart';
 import 'package:hikayat/main.dart';
 import 'package:hikayat/theme/theme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DrawerWidget extends StatelessWidget {
   final MainController controller = Get.find();
@@ -20,7 +21,10 @@ class DrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MainController>(builder: (controller) {
+    return GetBuilder<MainController>(
+      init: controller,
+      builder: (controller) {
+      
       return Container(
         color: context.theme.primaryColor,
         child: Column(
@@ -31,14 +35,118 @@ class DrawerWidget extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Obx(() {
                     return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Card(
+                              child: SizedBox(
+                                height: Get.height * 0.05,
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.defaultDialog(
+                                      title: "About us".tr,
+                                      titleStyle:
+                                          context.theme.textTheme.bodyMedium ,
+                                      content: Text(
+                                        "contact us message".tr,
+                                        style:
+                                            context.theme.textTheme.bodyMedium,
+                                      ),
+                                    );
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "About us".tr,
+                                      ),
+                                      const SizedBox(width: 10),
+                                      const Icon(Icons.info),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Card(
+                              child: SizedBox(
+                                height: Get.height * 0.05,
+                                child: InkWell(
+                                  onTap: () {
+                                    //TODO: dont forget to add contack email
+                                    final Uri url = Uri(
+                                      scheme: 'mailto',
+                                      path: 'support@example.com',
+                                      query: 'subject=Contact Us&body=Hello,',
+                                    );
+                                    launchUrl(url);
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("contact us".tr),
+                                      const SizedBox(width: 10),
+                                      const Icon(Icons.mail)
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Card(
+                              child: SizedBox(
+                                height: Get.height * 0.05,
+                                child: InkWell(
+                                  //TODO: dont forget to add telegram channel link
+                                  onTap: () {
+                                    Uri url = Uri.parse(
+                                        "https://t.me/s/pathto_flutter");
+                                    launchUrl(url);
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("Telegram".tr),
+                                      const SizedBox(width: 10),
+                                      const Icon(Icons.send),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Card(
+                              child: SizedBox(
+                                height: Get.height * 0.05,
+                                child: InkWell(
+                                  //TODO: dont forget to add play store link
+                                  onTap: () {
+                                    // Launch app store to rate app here
+                                    Uri url = Uri.parse(
+                                        "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe");
+                                    launchUrl(url);
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("Rate us".tr),
+                                      const SizedBox(width: 10),
+                                      const Icon(Icons.star),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        const Divider(),
                         Text("Font family".tr,
                             style: controller.chaptertexttheme.value.bodyLarge),
                         const Divider(),
                         DropdownButton<String>(
+                      
+                           
+                          dropdownColor: context.theme.primaryColor,
                             value: controller.fontfamily.value,
                             style: controller.chaptertexttheme.value.bodyLarge
                                 ?.copyWith(fontSize: 18),
@@ -158,11 +266,10 @@ class DrawerWidget extends StatelessWidget {
                         CheckboxListTile(
                             title: Text("Add Background Image".tr,
                                 style: const TextStyle(fontSize: 22)),
-                            value:  controller.showBackgroundImage,
+                            value: controller.showBackgroundImage,
                             onChanged: (value) {
                               value = !value!;
                               controller.changeBackgroundImage();
-                              
                             }),
                       ],
                     );

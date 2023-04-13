@@ -26,7 +26,7 @@ class MyLocale implements Translations {
           "read more": "اقرأ المزيد",
           "read less": "اقرأ اقل",
           "no internet": "لا يوجد اتصال بالانترنت",
-          "Oops! couldn't find any chapters":"عفوا! لم يتم العثور على اي فصول",
+          "Oops! couldn't find any chapters": "عفوا! لم يتم العثور على اي فصول",
           "Hikayat": "حكايات",
           "Theme": "الوضع",
           "Font Size": "حجم الخط",
@@ -47,7 +47,16 @@ class MyLocale implements Translations {
           "Lalezar": "لاليزار",
           "Add Background Image": "اضف صورة خلفية",
           "Writer": "الكاتب",
-          
+          "This is the last chapter": "هذا اخر فصل",
+          "This is the first chapter": "هذا اول فصل",
+          "Next": "التالي",
+          "Previous": "السابق",
+          "contact us message":
+              " نحن فريق يحب الكتب ونرغب في نشرها من خلال تطبيقنا للتواصل معنا او ارسال اقتراحاتكم او اي شيء تريدون ان نعرفه يمكنكم الاتصال بنا عبر البريد الالكتروني او عن طريق قناتنا على تيليجرام ",
+          "Rate us":"قيم التطبيق",
+          "Share us":"شارك التطبيق",
+          "About us":"من نحن",
+          "Telegram":"تيليجرام",
         },
       };
 }
