@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Controllers/ChapterController.dart';
 import 'package:hikayat/Controllers/DataController.dart';
+import 'package:hikayat/Controllers/firebaseLogEventController.dart';
 import 'package:hikayat/bricks/DrawerWidget.dart';
 import 'package:hikayat/model/DataClass.dart';
 import 'package:hikayat/Controllers/MainController.dart';
@@ -9,6 +10,7 @@ import 'package:hikayat/Controllers/MainController.dart';
 class ChapterPage extends StatelessWidget {
   ChapterController controller = Get.find();
   DataController dataController = Get.find();
+  FirebaseLogEventController firebaseLogEventController = Get.find();
   Chapter? chapter;
 
   Story? story;
@@ -20,6 +22,7 @@ class ChapterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     chapter = Get.arguments["chapter"];
     story = Get.arguments["story"];
+    firebaseLogEventController.logEventChapterOpen(chapter!.title,story!.title);
     return Scaffold(
       drawer: DrawerWidget(),
       body: GetBuilder<MainController>(

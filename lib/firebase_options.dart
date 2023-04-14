@@ -17,13 +17,19 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -46,31 +52,11 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAmVf6rRBmXCQ03epXhbMUrR9XCWIp87ro',
-    appId: '1:192158253933:web:1e3cba98d6d26b6c749064',
-    messagingSenderId: '192158253933',
-    projectId: 'hikayat-969a7',
-    authDomain: 'hikayat-969a7.firebaseapp.com',
-    storageBucket: 'hikayat-969a7.appspot.com',
-    measurementId: 'G-2RQPD4Z7PF',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDdJD5MJewwk8oRoRjwK88_ybz_IuHLhgs',
     appId: '1:192158253933:android:bb37fbc40ef4ef9c749064',
     messagingSenderId: '192158253933',
     projectId: 'hikayat-969a7',
     storageBucket: 'hikayat-969a7.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCwgvJ9DiOjfN-8hTOkJb2N6hoKOAv8Fek',
-    appId: '1:192158253933:ios:32deffcac7c4ce2b749064',
-    messagingSenderId: '192158253933',
-    projectId: 'hikayat-969a7',
-    storageBucket: 'hikayat-969a7.appspot.com',
-    iosClientId: '192158253933-qgtc0k5rret2ukl8jqbq4bgu2b0qlehh.apps.googleusercontent.com',
-    iosBundleId: 'com.example.hikayat',
   );
 }

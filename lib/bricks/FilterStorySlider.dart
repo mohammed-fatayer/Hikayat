@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Controllers/DataController.dart';
 import 'package:hikayat/Controllers/StoryController.dart';
+import 'package:hikayat/Controllers/firebaseLogEventController.dart';
 import 'package:hikayat/model/DataClass.dart';
 
 class FilterStorySlider extends StatelessWidget {
@@ -12,12 +13,15 @@ class FilterStorySlider extends StatelessWidget {
   DataController controller = Get.find();
 
   StoryController stroryController = Get.find();
+  FirebaseLogEventController firebaseLogEventController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     controller.FilteredStories.value = [];
     stroryController.filter = filter;
+    firebaseLogEventController.logEventFilterClick(filter);
     controller.fetchStoriesByFilter(filter);
+
     
     ThemeData theme = context.theme;
     return GetBuilder<DataController>(

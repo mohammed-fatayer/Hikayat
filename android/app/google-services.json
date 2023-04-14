@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "192158253933-5qej5tnvl3b0it65aqd28nfptneajthu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hikayat.hayat.name",
+            "certificate_hash": "4648a8e9cb597f833ea771f9f93d26491443dea3"
+          }
+        },
+        {
           "client_id": "192158253933-1o9cc2cpjidp1i7ukv5jp2gb5c72fn4c.apps.googleusercontent.com",
           "client_type": 3
         }

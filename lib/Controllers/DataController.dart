@@ -122,8 +122,8 @@ class DataController extends GetxController {
   Future fetchStoriesByFilter(String filter) async {
     List<Story> data = [];
 
-     
- 
+    isloadingmoreForFilterSlider = true;
+
     // Get the last document from the current data set
     DocumentSnapshot<Object?>? lastDoc = FilteredStories.value.isNotEmpty
         ? FilteredStories.value.last.docSnapshot
@@ -138,8 +138,7 @@ class DataController extends GetxController {
     }
 
     await query.limit(5).get().then((value) {
-      
-        if (value.docs.isEmpty) {
+      if (value.docs.isEmpty) {
         print("no more opjects");
         update();
         isloadingmoreForFilterSlider = false;
@@ -149,35 +148,35 @@ class DataController extends GetxController {
         print("already loading");
 
         return;
-      } 
-         isloading = true;
-        for (var story in value.docs) {
-          data.add(Story(
-            title: story["title"],
-            writer: story["writer"],
-            description: story["description"],
-            imageUrl: story["image"],
-            chapters: [],
-            genre: story["genre"],
-            timestamp: story["timestamp"],
-            imageRef: story["imageRef"],
-            filter: story["filter"],
-            docSnapshot: story,
-          ));
-        }
-      
+      }
+      isloading = true;
+      for (var story in value.docs) {
+        data.add(Story(
+          title: story["title"],
+          writer: story["writer"],
+          description: story["description"],
+          imageUrl: story["image"],
+          chapters: [],
+          genre: story["genre"],
+          timestamp: story["timestamp"],
+          imageRef: story["imageRef"],
+          filter: story["filter"],
+          docSnapshot: story,
+        ));
+      }
     }).catchError((e) {
       print(e);
     });
-    //TODO:add  loading more data circular progress indicator
     if (data.isEmpty) {
       print("No more data");
     }
-
+    if (data.length < 5) {
+      isloadingmoreForFilterSlider = false;
+      print("less than 5");
+    }
     isloading = false;
     FilteredStories.value += data;
     update();
-  
   }
 
   Future searchDelegateStories(String query) async {

@@ -1,9 +1,6 @@
 
 
 
-TODO: make firebase analytic and crashlytics work
-
-
 TODO: ads
 
 
@@ -16,5 +13,4 @@ TODO:check translation  for font familys make sabah do it
 
 TODO: icon and splash screeen  
 
-
-FIXME: if  filter  has low stories like 1  it will have engless loading animation(sometimes)
+FIXME: firebase real time trigers only in first open and app remove  (not sure if its from the app or firebase side)

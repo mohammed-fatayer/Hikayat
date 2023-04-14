@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Controllers/DataController.dart';
+import 'package:hikayat/Controllers/firebaseLogEventController.dart';
 import 'package:hikayat/bricks/ChaptersListWidget.dart';
 import 'package:hikayat/bricks/FilterRowWidget.dart';
 import 'package:hikayat/model/DataClass.dart';
@@ -11,10 +12,13 @@ import 'package:hikayat/model/DataClass.dart';
 class StoryPage extends StatelessWidget {
   final Story story = Get.arguments;
   StoryPage({super.key, required});
-
+  
   DataController dataController = Get.find();
+  FirebaseLogEventController firebaseLogEventController = Get.find();
   @override
   Widget build(BuildContext context) {
+    firebaseLogEventController.logEventStoryOpen(story.title);
+     
     return Scaffold(
       body: Stack(
         children: <Widget>[

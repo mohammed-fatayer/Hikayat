@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:hikayat/Localizations/local.dart';
 import 'package:hikayat/View/ChapterPage.dart';
 import 'package:hikayat/View/GenrePage.dart';
+import 'package:hikayat/View/MainPage.dart';
 import 'package:hikayat/View/StoryPage.dart';
 import 'package:hikayat/bricks/Onboarding.dart';
 import 'package:hikayat/firebase_options.dart';
@@ -12,8 +13,6 @@ import 'package:hikayat/utils/mybindings.dart';
 import 'package:hikayat/theme/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Localizations/localeController.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'View/MainPage.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -29,8 +28,6 @@ void main() async {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   sharedpref = await SharedPreferences.getInstance();
   String? token = await messaging.getToken();
-  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  FirebaseAnalyticsObserver(analytics: analytics);
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
@@ -42,15 +39,17 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer =
+      FirebaseAnalyticsObserver(analytics: analytics);
+      
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-  
     LocaleController controller = Get.put(LocaleController());
     String? theme = sharedpref!.getString("theme");
     return GetMaterialApp(
-    
+        navigatorObservers: <NavigatorObserver>[observer],
         debugShowCheckedModeBanner: false,
         title: 'Hikayat',
         locale: controller.initlanguage,

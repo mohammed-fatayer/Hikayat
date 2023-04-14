@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Controllers/DataController.dart';
 import 'package:hikayat/Controllers/GenreController.dart';
+import 'package:hikayat/Controllers/firebaseLogEventController.dart';
 import 'package:hikayat/bricks/ParticularGenreStories.dart';
 import 'package:hikayat/model/DataClass.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -11,12 +12,13 @@ class GenrePage extends StatelessWidget {
   GenrePage({super.key});
   DataController dataController = Get.find<DataController>();
   GenreController controller = Get.find<GenreController>();
+  FirebaseLogEventController firebaseLogEventController = Get.find();
   Category category = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
     List<Story> stories = dataController.stories;
-
+    firebaseLogEventController.logEventGenreOpen(category.title);
     return Scaffold(
       body: Stack(
         children: <Widget>[
