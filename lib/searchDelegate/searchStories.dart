@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Controllers/DataController.dart';
+import 'package:hikayat/Controllers/firebaseLogEventController.dart';
 import 'package:hikayat/bricks/SearchResultWidget.dart';
 
 class SearchStories extends SearchDelegate {
+  FirebaseLogEventController firebaseLogEventController = Get.find();
+
   final DataController controller = Get.find();
 
   @override
   ThemeData appBarTheme(BuildContext context) {
+
+    firebaseLogEventController.logEventSearchClick();
     final ThemeData theme = Get.theme;
     final ColorScheme colorScheme = theme.colorScheme.copyWith(
       primary: Get.theme.primaryColor, // set the primary color here

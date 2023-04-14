@@ -43,6 +43,7 @@ class MainPage extends StatelessWidget {
             onPressed: () async {
               // show search delegate in getx
               await showSearch(context: context, delegate: SearchStories());
+              
             },
           )
         ],

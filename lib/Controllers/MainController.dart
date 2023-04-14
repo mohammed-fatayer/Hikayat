@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hikayat/Controllers/DataController.dart';
 import 'package:hikayat/main.dart';
 import 'package:hikayat/model/DataClass.dart';
@@ -15,6 +16,7 @@ class MainController extends GetxController {
    List<Story> randomStories = [];
   final MainPageGridSliderScrollController = ScrollController();
   final MainPageLatestSliderScrollController = ScrollController();
+
   @override
   void onInit() async {
     dataController = Get.find();

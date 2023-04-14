@@ -39,4 +39,35 @@ class FirebaseLogEventController extends GetxController {
       },
     );
   }
+  //new one for opening search bar 
+  Future logEventSearchClick() async {
+    await FirebaseAnalytics.instance.logEvent(
+      name: 'search_click',
+    );
+  }
+
+  //new one for clicking on telegram
+  Future logEventTelegramClick() async {
+    await FirebaseAnalytics.instance.logEvent(
+      name: 'telegram_click',
+    );
+  }
+  //for rate us
+  Future logEventRateUsClick() async {
+    await FirebaseAnalytics.instance.logEvent(
+      name: 'rate_us_click',
+    );
+  }
+  //for about us 
+  Future logEventAboutUsClick() async {
+    await FirebaseAnalytics.instance.logEvent(
+      name: 'about_us_click',
+    );
+  }
+  //for email us
+  Future logEventEmailUsClick() async {
+    await FirebaseAnalytics.instance.logEvent(
+      name: 'email_us_click',
+    );
+  }
 }

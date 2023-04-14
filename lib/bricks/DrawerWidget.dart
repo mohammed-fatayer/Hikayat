@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Controllers/MainController.dart';
+import 'package:hikayat/Controllers/firebaseLogEventController.dart';
 import 'package:hikayat/main.dart';
 import 'package:hikayat/theme/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DrawerWidget extends StatelessWidget {
   final MainController controller = Get.find();
+  FirebaseLogEventController firebaseLogEventController = Get.find();
  
   final String _fontFamily = 'Amiri';
   final List<Color> colors = [
@@ -45,6 +47,8 @@ class DrawerWidget extends StatelessWidget {
                                 height: Get.height * 0.05,
                                 child: InkWell(
                                   onTap: () {
+                                    firebaseLogEventController
+                                        .logEventAboutUsClick();
                                     Get.defaultDialog(
                                       title: "About us".tr,
                                       titleStyle:
@@ -74,6 +78,8 @@ class DrawerWidget extends StatelessWidget {
                                 height: Get.height * 0.05,
                                 child: InkWell(
                                   onTap: () {
+                                    firebaseLogEventController
+                                        .logEventEmailUsClick();
                                     //TODO: dont forget to add contack email
                                     final Uri url = Uri(
                                       scheme: 'mailto',
@@ -97,8 +103,11 @@ class DrawerWidget extends StatelessWidget {
                               child: SizedBox(
                                 height: Get.height * 0.05,
                                 child: InkWell(
+                                
                                   //TODO: dont forget to add telegram channel link
                                   onTap: () {
+                                     firebaseLogEventController
+                                        .logEventTelegramClick();
                                     Uri url = Uri.parse(
                                         "https://t.me/s/pathto_flutter");
                                     launchUrl(url);
@@ -120,6 +129,8 @@ class DrawerWidget extends StatelessWidget {
                                 child: InkWell(
                                   //TODO: dont forget to add play store link
                                   onTap: () {
+                                    firebaseLogEventController
+                                        .logEventRateUsClick();
                                     // Launch app store to rate app here
                                     Uri url = Uri.parse(
                                         "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe");
