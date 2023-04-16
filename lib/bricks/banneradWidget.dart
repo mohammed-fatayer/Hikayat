@@ -9,23 +9,27 @@ class BannerAdwWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    adhelper.bannerisready = false;
-   
+  
+
     adhelper.getbanerad();
     return GetBuilder(
-      id: 'bannerwidget',
-      builder: (Adhelper adhelper) {
-      
-      return SizedBox(
-          height: 50,
-          width: Get.width,
-          child: SizedBox(
-            child: adhelper.bannerisready
-                ? AdWidget(
-                    ad: adhelper.bannerad!,
-                  )
-                : const SizedBox(),
-          ));
-    });
+        id: 'bannerwidget',
+        builder: (Adhelper adhelper) {
+          return Container(
+            width: Get.width,
+            color:  context.theme.primaryColor,
+            child: Container(
+              constraints: BoxConstraints.tightFor(
+                width: adhelper.bannerad!.size.width.toDouble(),
+                height: adhelper.bannerad!.size.height.toDouble(),
+              ),
+              child: adhelper.bannerisready
+                  ? AdWidget(
+                      ad: adhelper.bannerad!,
+                    )
+                  : const SizedBox(),
+            ),
+          );
+        });
   }
 }

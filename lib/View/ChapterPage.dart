@@ -4,7 +4,7 @@ import 'package:hikayat/Controllers/ChapterController.dart';
 import 'package:hikayat/Controllers/DataController.dart';
 import 'package:hikayat/Controllers/firebaseLogEventController.dart';
 import 'package:hikayat/bricks/DrawerWidget.dart';
-import 'package:hikayat/bricks/banneradWidget.dart';
+import 'package:hikayat/main.dart';
 import 'package:hikayat/model/DataClass.dart';
 import 'package:hikayat/Controllers/MainController.dart';
 
@@ -26,7 +26,6 @@ class ChapterPage extends StatelessWidget {
     firebaseLogEventController.logEventChapterOpen(
         chapter!.title, story!.title);
     return Scaffold(
-      bottomNavigationBar: const BannerAdwWidget(),
       drawer: DrawerWidget(),
       body: GetBuilder<MainController>(
         builder: (controller) {
@@ -119,10 +118,8 @@ class ChapterPage extends StatelessWidget {
                                       Future.delayed(
                                           const Duration(milliseconds: 200),
                                           () {
-                                        Get.toNamed("/chapter", arguments: {
-                                          "chapter": newchapter,
-                                          "story": story,
-                                        });
+                                        adhelper.showInterstitialad(
+                                            story!, newchapter);
                                       });
                                     }
                                   },
@@ -155,10 +152,8 @@ class ChapterPage extends StatelessWidget {
                                       Future.delayed(
                                           const Duration(milliseconds: 200),
                                           () {
-                                        Get.toNamed("/chapter", arguments: {
-                                          "chapter": newchapter,
-                                          "story": story,
-                                        });
+                                        adhelper.showInterstitialad(
+                                            story!, newchapter);
                                       });
                                     }
                                   },

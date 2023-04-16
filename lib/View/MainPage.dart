@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hikayat/Controllers/MainController.dart';
+import 'package:hikayat/Controllers/ad_Controller.dart';
 import 'package:hikayat/bricks/DiscoverGenres.dart';
 import 'package:hikayat/bricks/DrawerWidget.dart';
 import 'package:hikayat/bricks/StoryGridSlider.dart';
 import 'package:hikayat/bricks/StorySlider.dart';
-import 'package:hikayat/bricks/banneradWidget.dart';
 import 'package:hikayat/searchDelegate/searchStories.dart';
 
 class MainPage extends StatelessWidget {
@@ -15,6 +16,7 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: context.theme.primaryColor,
@@ -64,6 +66,7 @@ class MainPage extends StatelessWidget {
                   const StorySlider(),
                   StoryGridSlide(),
 
+
                   // StorySlider(),
                   // StorySlider(
                   //   themeData: state.themeData,
@@ -73,14 +76,6 @@ class MainPage extends StatelessWidget {
                   // ),
                   // StorySlider(),
                 ],
-              ),
-              Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: const <Widget>[
-                    BannerAdwWidget(),
-                  ],
-                ),
               ),
             ],
           );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hikayat/Controllers/DataController.dart';
+import 'package:hikayat/main.dart';
 import 'package:hikayat/model/DataClass.dart';
 
 class ChaptersListWidget extends StatelessWidget {
@@ -20,7 +21,6 @@ class ChaptersListWidget extends StatelessWidget {
             child: contoller.chapters.isEmpty
                 ? Center(
                     child: Padding(
-
                       padding: const EdgeInsets.only(top: 100.0),
                       child: Text(
                         "Oops! couldn't find any chapters".tr,
@@ -47,11 +47,8 @@ class ChaptersListWidget extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: InkWell(
                               onTap: () {
-                                String storyname = story.title;
-                                Get.toNamed("/chapter", arguments: {
-                                  "chapter": contoller.chapters[index],
-                                  "story": story,
-                                });
+                                Chapter chapter = contoller.chapters[index];
+                                adhelper.showInterstitialad(story, chapter);
                               },
                               child: Column(
                                 children: <Widget>[

@@ -7,7 +7,6 @@ import 'package:hikayat/Controllers/DataController.dart';
 import 'package:hikayat/Controllers/firebaseLogEventController.dart';
 import 'package:hikayat/bricks/ChaptersListWidget.dart';
 import 'package:hikayat/bricks/FilterRowWidget.dart';
-import 'package:hikayat/bricks/banneradWidget.dart';
 import 'package:hikayat/model/DataClass.dart';
 
 class StoryPage extends StatelessWidget {
@@ -104,7 +103,7 @@ class StoryPage extends StatelessWidget {
                         width: double.infinity,
                         height: double.infinity,
                         child: Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 3),
+                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
                           child: Card(
                             elevation: 5,
                             shape: RoundedRectangleBorder(
@@ -221,14 +220,6 @@ class StoryPage extends StatelessWidget {
               )
             ],
           ),
-           Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: const <Widget>[
-            BannerAdwWidget(),
-          ],
-        ),
-      ),
         ],
         
       ),

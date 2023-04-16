@@ -10,6 +10,7 @@ import 'package:hikayat/View/GenrePage.dart';
 import 'package:hikayat/View/MainPage.dart';
 import 'package:hikayat/View/StoryPage.dart';
 import 'package:hikayat/bricks/Onboarding.dart';
+import 'package:hikayat/bricks/banneradWidget.dart';
 import 'package:hikayat/firebase_options.dart';
 import 'package:hikayat/utils/mybindings.dart';
 import 'package:hikayat/theme/theme.dart';
@@ -53,51 +54,69 @@ class MyApp extends StatelessWidget {
     LocaleController controller = Get.put(LocaleController());
     String? theme = sharedpref!.getString("theme");
     return GetMaterialApp(
-        navigatorObservers: <NavigatorObserver>[observer],
-        debugShowCheckedModeBanner: false,
-        title: 'Hikayat',
-        
-        locale: controller.initlanguage,
-        fallbackLocale: const Locale("ar"),
-        translations: MyLocale(),
-        binds: MyBinding().dependencies(),
-        theme: theme == "purple"
-            ? Themes.customPurpleTheme
-            : theme == "dark"
-                ? Themes.customDarkTheme
-                : Themes.customLightTheme,
-        // initialRoute: showOnBoarding ? "/onboarding" : "/",
-        getPages: [
-          GetPage(
-            name: "/",
-            page: () => UpgradeAlert(
-                upgrader: Upgrader(
-                  durationUntilAlertAgain: const Duration(days: 1),
-                  showIgnore: false,
-                  dialogStyle: GetPlatform.isAndroid
-                      ? UpgradeDialogStyle.material
-                      : UpgradeDialogStyle.cupertino,
-                ),
-                child: MainPage()),
+      navigatorObservers: <NavigatorObserver>[observer],
+      debugShowCheckedModeBanner: false,
+      title: 'Hikayat',
+      locale: controller.initlanguage,
+      fallbackLocale: const Locale("ar"),
+
+      translations: MyLocale(),
+      binds: MyBinding().dependencies(),
+      theme: theme == "purple"
+          ? Themes.customPurpleTheme
+          : theme == "dark"
+              ? Themes.customDarkTheme
+              : Themes.customLightTheme,
+      // initialRoute: showOnBoarding ? "/onboarding" : "/",
+      builder: (context, child) => BaseWidget(child: child!),
+      getPages: [
+        GetPage(
+          name: "/",
+          page: () => UpgradeAlert(
+              upgrader: Upgrader(
+                durationUntilAlertAgain: const Duration(days: 1),
+                showIgnore: false,
+                dialogStyle: GetPlatform.isAndroid
+                    ? UpgradeDialogStyle.material
+                    : UpgradeDialogStyle.cupertino,
+              ),
+              child: MainPage()),
+          transition: Transition.noTransition,
+        ),
+        GetPage(
+            name: "/genre",
+            page: () => GenrePage(),
+            transition: Transition.noTransition),
+        GetPage(
+            name: "/onboarding",
+            page: () => const OnboardingPage1(),
+            transition: Transition.noTransition),
+        GetPage(
+            name: "/story",
+            page: () => StoryPage(),
             transition: Transition.noTransition,
-          ),
-          GetPage(
-              name: "/genre",
-              page: () => GenrePage(),
-              transition: Transition.noTransition),
-          GetPage(
-              name: "/onboarding",
-              page: () => const OnboardingPage1(),
-              transition: Transition.noTransition),
-          GetPage(
-              name: "/story",
-              page: () => StoryPage(),
-              transition: Transition.noTransition,
-              preventDuplicates: false),
-          GetPage(
-              name: "/chapter",
-              page: () => ChapterPage(),
-              transition: Transition.noTransition),
-        ]);
+            preventDuplicates: false),
+        GetPage(
+            name: "/chapter",
+            page: () => ChapterPage(),
+            transition: Transition.noTransition),
+      ],
+    );
+  }
+}
+
+class BaseWidget extends StatelessWidget {
+  final Widget child;
+  const BaseWidget({super.key, required this.child});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(child: child),
+          const BannerAdwWidget(),
+        ],
+      ),
+    );
   }
 }

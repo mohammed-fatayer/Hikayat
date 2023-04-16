@@ -2,15 +2,15 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'dart:io';
 
-import 'package:hikayat/Controllers/MainController.dart';
+import 'package:hikayat/model/DataClass.dart';
 
 class Adhelper extends GetxController {
   bool bannerisready = false;
 
   bool videoisready = false;
 
-   InterstitialAd? rewardad;
-   BannerAd? bannerad;
+  InterstitialAd? rewarded;
+  BannerAd? bannerad;
 
   @override
   void onInit() {
@@ -20,10 +20,9 @@ class Adhelper extends GetxController {
   }
 
   BannerAd getbanerad() {
-    
-    bannerad!= null ? bannerad!.dispose() : null;
-
-
+    if (bannerad != null) {
+      return bannerad!;
+    }
     return BannerAd(
         size: Get.width <= 468 ? AdSize.banner : AdSize.fullBanner,
         adUnitId: "ca-app-pub-3940256099942544/6300978111",
@@ -51,7 +50,7 @@ class Adhelper extends GetxController {
         //ca-app-pub-6574668057036090/8762355294     real
         request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(onAdLoaded: (ad) {
-          rewardad = ad;
+          rewarded = ad;
 
           videoisready = true;
         }, onAdFailedToLoad: (LoadAdError error) {
@@ -65,8 +64,24 @@ class Adhelper extends GetxController {
     }
   }
 
+  showInterstitialad(Story story, Chapter chapter) {
+    videoisready
+        ? rewarded!.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              Get.toNamed("/chapter", arguments: {
+                "chapter": chapter,
+                "story": story,
+              });
+              rewarded!.dispose();
+              getInterstitialad();
+            },
+          )
+        : null;
+    rewarded!.show();
+  }
+
   getappopenad() async {
-    AppOpenAd? openad;
+    AppOpenAd? opened;
     if (Platform.isAndroid) {
       await AppOpenAd.load(
           adUnitId: 'ca-app-pub-3940256099942544/3419835294',
@@ -76,8 +91,8 @@ class Adhelper extends GetxController {
 
           request: const AdRequest(),
           adLoadCallback: AppOpenAdLoadCallback(onAdLoaded: ((ad) {
-            openad = ad;
-            openad!.show();
+            opened = ad;
+            opened!.show();
           }), onAdFailedToLoad: (LoadAdError error) {
             // print(error);
           }),
@@ -88,10 +103,10 @@ class Adhelper extends GetxController {
   }
 
   Future showvideo() async {
-    rewardad!.show();
-    rewardad!.fullScreenContentCallback =
+    rewarded!.show();
+    rewarded!.fullScreenContentCallback =
         FullScreenContentCallback(onAdDismissedFullScreenContent: (ad) async {
-      rewardad!.dispose();
+      rewarded!.dispose();
       videoisready = false;
       getInterstitialad();
       Future.delayed(const Duration(seconds: 1));
