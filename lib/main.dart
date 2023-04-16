@@ -2,6 +2,8 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:hikayat/Controllers/ad_Controller.dart';
 import 'package:hikayat/Localizations/local.dart';
 import 'package:hikayat/View/ChapterPage.dart';
 import 'package:hikayat/View/GenrePage.dart';
@@ -19,8 +21,10 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 
 SharedPreferences? sharedpref;
 bool showOnBoarding = false;
+Adhelper adhelper = Get.put(Adhelper());
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -52,6 +56,7 @@ class MyApp extends StatelessWidget {
         navigatorObservers: <NavigatorObserver>[observer],
         debugShowCheckedModeBanner: false,
         title: 'Hikayat',
+        
         locale: controller.initlanguage,
         fallbackLocale: const Locale("ar"),
         translations: MyLocale(),

@@ -4,6 +4,7 @@ import 'package:hikayat/Controllers/ChapterController.dart';
 import 'package:hikayat/Controllers/DataController.dart';
 import 'package:hikayat/Controllers/firebaseLogEventController.dart';
 import 'package:hikayat/bricks/DrawerWidget.dart';
+import 'package:hikayat/bricks/banneradWidget.dart';
 import 'package:hikayat/model/DataClass.dart';
 import 'package:hikayat/Controllers/MainController.dart';
 
@@ -22,13 +23,15 @@ class ChapterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     chapter = Get.arguments["chapter"];
     story = Get.arguments["story"];
-    firebaseLogEventController.logEventChapterOpen(chapter!.title,story!.title);
+    firebaseLogEventController.logEventChapterOpen(
+        chapter!.title, story!.title);
     return Scaffold(
+      bottomNavigationBar: const BannerAdwWidget(),
       drawer: DrawerWidget(),
       body: GetBuilder<MainController>(
         builder: (controller) {
           return Container(
-            decoration:  BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(controller.currentBackground),
                   fit: BoxFit.cover),
@@ -99,7 +102,6 @@ class ChapterPage extends StatelessWidget {
                                     if (chapter!.chapterNumber ==
                                         dataController.chapters.length) {
                                       Get.rawSnackbar(
-                                        
                                         message: "This is the last chapter".tr,
                                         backgroundColor: const Color.fromARGB(
                                             255, 63, 63, 63),

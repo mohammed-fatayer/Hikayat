@@ -5,6 +5,7 @@ import 'package:hikayat/bricks/DiscoverGenres.dart';
 import 'package:hikayat/bricks/DrawerWidget.dart';
 import 'package:hikayat/bricks/StoryGridSlider.dart';
 import 'package:hikayat/bricks/StorySlider.dart';
+import 'package:hikayat/bricks/banneradWidget.dart';
 import 'package:hikayat/searchDelegate/searchStories.dart';
 
 class MainPage extends StatelessWidget {
@@ -43,7 +44,6 @@ class MainPage extends StatelessWidget {
             onPressed: () async {
               // show search delegate in getx
               await showSearch(context: context, delegate: SearchStories());
-              
             },
           )
         ],
@@ -54,22 +54,34 @@ class MainPage extends StatelessWidget {
       body: GetBuilder<MainController>(
         init: controller,
         builder: (controller) {
-          return ListView(
-            controller: controller.MainPageGridSliderScrollController,
-            physics: const ClampingScrollPhysics(),
-            children: <Widget>[
-              const DiscoverGenres(),
-              const StorySlider(),
-              StoryGridSlide(),
+          return Stack(
+            children: [
+              ListView(
+                controller: controller.MainPageGridSliderScrollController,
+                physics: const ClampingScrollPhysics(),
+                children: <Widget>[
+                  const DiscoverGenres(),
+                  const StorySlider(),
+                  StoryGridSlide(),
 
-              // StorySlider(),
-              // StorySlider(
-              //   themeData: state.themeData,
-              //   title: 'Upcoming Movies',
-              //   api: Endpoints.upcomingMoviesUrl(1),
-              //   genres: _genres,
-              // ),
-              // StorySlider(),
+                  // StorySlider(),
+                  // StorySlider(
+                  //   themeData: state.themeData,
+                  //   title: 'Upcoming Movies',
+                  //   api: Endpoints.upcomingMoviesUrl(1),
+                  //   genres: _genres,
+                  // ),
+                  // StorySlider(),
+                ],
+              ),
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: const <Widget>[
+                    BannerAdwWidget(),
+                  ],
+                ),
+              ),
             ],
           );
         },

@@ -4,6 +4,7 @@ import 'package:hikayat/Controllers/DataController.dart';
 import 'package:hikayat/Controllers/GenreController.dart';
 import 'package:hikayat/Controllers/firebaseLogEventController.dart';
 import 'package:hikayat/bricks/ParticularGenreStories.dart';
+import 'package:hikayat/bricks/banneradWidget.dart';
 import 'package:hikayat/model/DataClass.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'dart:ui';
@@ -68,7 +69,8 @@ class GenrePage extends StatelessWidget {
                                 0.5,
                                 0.75
                               ])),
-                    )
+                    ),
+                    
                   ],
                 ),
               ),
@@ -213,7 +215,14 @@ class GenrePage extends StatelessWidget {
                 ),
               )
             ],
-          )
+          ), Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: const <Widget>[
+            BannerAdwWidget(),
+          ],
+        ),
+      ),
         ],
       ),
     );

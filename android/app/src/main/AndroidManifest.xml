@@ -31,7 +31,10 @@
             android:name="flutterEmbedding"
             android:value="2" />
             
-        ...
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6574668057036090~9337070365"/>
+
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
