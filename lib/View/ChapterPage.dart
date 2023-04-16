@@ -28,9 +28,9 @@ class ChapterPage extends StatelessWidget {
       body: GetBuilder<MainController>(
         builder: (controller) {
           return Container(
-            decoration: const BoxDecoration(
+            decoration:  BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/images/paper.jpg"),
+                  image: AssetImage(controller.currentBackground),
                   fit: BoxFit.cover),
             ),
             child: Scaffold(

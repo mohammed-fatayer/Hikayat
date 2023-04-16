@@ -53,10 +53,17 @@ class MyLocale implements Translations {
           "Previous": "السابق",
           "contact us message":
               " نحن فريق يحب الكتب ونرغب في نشرها من خلال تطبيقنا للتواصل معنا او ارسال اقتراحاتكم او اي شيء تريدون ان نعرفه يمكنكم الاتصال بنا عبر البريد الالكتروني او عن طريق قناتنا على تيليجرام ",
-          "Rate us":"قيم التطبيق",
-          "Share us":"شارك التطبيق",
-          "About us":"من نحن",
-          "Telegram":"تيليجرام",
+          "Rate us": "قيم التطبيق",
+          "Share us": "شارك التطبيق",
+          "About us": "من نحن",
+          "Telegram": "تيليجرام",
+          "assets/images/cool.jpg": "زخرفة",
+          "assets/images/paper.jpg": "ورق",
+          "assets/images/rain.jpg": "مطر",
+          "assets/images/greypaper.jpg": "ورق رمادي",
+          "assets/images/framedimage.jpg": "اطار",
+          "assets/images/flower.jpg": "زهور",
+          "Show Background Image": "اظهر الخلفية",
         },
       };
 }
