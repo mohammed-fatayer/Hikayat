@@ -11,7 +11,7 @@ class SearchStories extends SearchDelegate {
 
   @override
   ThemeData appBarTheme(BuildContext context) {
-    firebaseLogEventController.logEventSearchClick();
+    
     final ThemeData theme = Get.theme;
     final ColorScheme colorScheme = theme.colorScheme.copyWith(
       primary: Get.theme.primaryColor, // set the primary color here

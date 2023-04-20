@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hikayat/Controllers/MainController.dart';
 import 'package:hikayat/Controllers/ad_Controller.dart';
+import 'package:hikayat/Controllers/firebaseLogEventController.dart';
 import 'package:hikayat/bricks/DiscoverGenres.dart';
 import 'package:hikayat/bricks/DrawerWidget.dart';
 import 'package:hikayat/bricks/StoryGridSlider.dart';
@@ -11,6 +12,7 @@ import 'package:hikayat/searchDelegate/searchStories.dart';
 
 class MainPage extends StatelessWidget {
   MainController controller = Get.find();
+  FirebaseLogEventController firebaseLogEventController = Get.find();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   MainPage({super.key});
 
@@ -45,6 +47,7 @@ class MainPage extends StatelessWidget {
             icon: const Icon(Icons.search),
             onPressed: () async {
               // show search delegate in getx
+              firebaseLogEventController.logEventSearchClick();
               await showSearch(context: context, delegate: SearchStories());
             },
           )
