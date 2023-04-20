@@ -16,8 +16,6 @@ TODO: icon and splash screeen
 
 TODO: in app review pakage
 
-FIXME: fix chapter_click event
 
 
 
-admob ca-app-pub-6574668057036090~9337070365

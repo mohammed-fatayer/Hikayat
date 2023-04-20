@@ -11,16 +11,22 @@ class SearchStories extends SearchDelegate {
 
   @override
   ThemeData appBarTheme(BuildContext context) {
-
     firebaseLogEventController.logEventSearchClick();
     final ThemeData theme = Get.theme;
     final ColorScheme colorScheme = theme.colorScheme.copyWith(
       primary: Get.theme.primaryColor, // set the primary color here
     );
     return ThemeData(
+      textTheme: colorScheme.brightness == Brightness.dark
+          ? theme.textTheme
+          : theme.textTheme.copyWith(
+              titleLarge: theme.textTheme.titleLarge!.copyWith(
+                color: Get.theme.colorScheme.secondary,
+              ),
+            ),
       primaryColor: Get.theme.primaryColor,
       appBarTheme: AppBarTheme(
-        color: colorScheme.surface,
+        color: colorScheme.primary,
         systemOverlayStyle: theme.appBarTheme.systemOverlayStyle,
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -36,9 +42,9 @@ class SearchStories extends SearchDelegate {
   List<Widget>? buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: const Icon(
+        icon: Icon(
           Icons.clear,
-          color: Colors.black12,
+          color: Get.theme.colorScheme.secondary,
         ),
         onPressed: () {
           query = '';
@@ -54,14 +60,16 @@ class SearchStories extends SearchDelegate {
         close(context, null);
       },
       icon: const Icon(Icons.arrow_back),
-      color: Colors.black12,
+      color: Get.theme.colorScheme.secondary,
     );
   }
 
   @override
   Widget buildResults(BuildContext context) {
     if (query.isEmpty) {
-      return Container();
+      return Container(
+        color: Get.theme.primaryColor.withOpacity(0.8),
+      );
     } else {
       return GetBuilder<DataController>(
         builder: (controller) {
@@ -76,10 +84,10 @@ class SearchStories extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     if (query.length < 3) {
-      return Container();
+      return Container(
+        color: Get.theme.primaryColor.withOpacity(0.8),
+      );
     } else {
-      
-     
       return GetBuilder<DataController>(
         builder: (controller) {
           return SearchDelegateResults(

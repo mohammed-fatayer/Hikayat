@@ -217,111 +217,124 @@ class DrawerWidget extends StatelessWidget {
                                     )
                                     .toList(),
                                 onChanged: (value) {
-                                  
                                   controller.changeBackgroundImage(value!);
                                 }),
+                            const Divider(height: 2, ),
+                            ListTile(
+                              title: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    'Theme'.tr,
+                                    style: context.theme.textTheme.bodyLarge,
+                                  ),
+                                ],
+                              ),
+                              subtitle: SizedBox(
+                                height: 100,
+                                child: Center(
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    shrinkWrap: true,
+                                    itemCount: 3,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Stack(
+                                        children: <Widget>[
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: <Widget>[
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Container(
+                                                  width: 50,
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      border: Border.all(
+                                                          width: 2,
+                                                          color:
+                                                              borders[index]),
+                                                      color: colors[index]),
+                                                ),
+                                              ),
+                                              Text(themes[index],
+                                                  style: context.theme.textTheme
+                                                      .bodyLarge)
+                                            ],
+                                          ),
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: <Widget>[
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    switch (index) {
+                                                      case 0:
+                                                        Get.changeTheme(Themes
+                                                            .customLightTheme);
+                                                        sharedpref!.setString(
+                                                            "theme", "light");
+                                                        controller
+                                                            .changeTextTheme();
+                                                        controller.update();
+                                                        break;
+                                                      case 1:
+                                                        Get.changeTheme(Themes
+                                                            .customPurpleTheme);
+
+                                                        sharedpref!.setString(
+                                                            "theme", "purple");
+                                                        controller
+                                                            .changeTextTheme();
+                                                        controller.update();
+                                                        break;
+                                                      case 2:
+                                                        Get.changeTheme(Themes
+                                                            .customDarkTheme);
+
+                                                        sharedpref!.setString(
+                                                            "theme", "dark");
+                                                        controller
+                                                            .changeTextTheme();
+                                                        controller.update();
+
+                                                        break;
+                                                    }
+                                                  },
+                                                  child: SizedBox(
+                                                    width: 50,
+                                                    height: 50,
+                                                    child: context.theme
+                                                                .primaryColor ==
+                                                            colors[index]
+                                                        ? Icon(Icons.done,
+                                                            color: context
+                                                                .theme
+                                                                .colorScheme
+                                                                .secondary)
+                                                        : Container(),
+                                                  ),
+                                                ),
+                                              ),
+                                              Text(themes[index],
+                                                  style: context.theme.textTheme
+                                                      .bodyLarge)
+                                            ],
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         );
                       }),
-                    ),
-                  ),
-                ),
-                ListTile(
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Theme'.tr,
-                        style: context.theme.textTheme.bodyLarge,
-                      ),
-                    ],
-                  ),
-                  subtitle: SizedBox(
-                    height: 100,
-                    child: Center(
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        itemCount: 3,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Stack(
-                            children: <Widget>[
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                              width: 2, color: borders[index]),
-                                          color: colors[index]),
-                                    ),
-                                  ),
-                                  Text(themes[index],
-                                      style: context.theme.textTheme.bodyLarge)
-                                ],
-                              ),
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: InkWell(
-                                      onTap: () {
-                                        switch (index) {
-                                          case 0:
-                                            Get.changeTheme(
-                                                Themes.customLightTheme);
-                                            sharedpref!
-                                                .setString("theme", "light");
-                                            controller.changeTextTheme();
-                                            controller.update();
-                                            break;
-                                          case 1:
-                                            Get.changeTheme(
-                                                Themes.customPurpleTheme);
-
-                                            sharedpref!
-                                                .setString("theme", "purple");
-                                            controller.changeTextTheme();
-                                            controller.update();
-                                            break;
-                                          case 2:
-                                            Get.changeTheme(
-                                                Themes.customDarkTheme);
-
-                                            sharedpref!
-                                                .setString("theme", "dark");
-                                            controller.changeTextTheme();
-                                            controller.update();
-
-                                            break;
-                                        }
-                                      },
-                                      child: SizedBox(
-                                        width: 50,
-                                        height: 50,
-                                        child: context.theme.primaryColor ==
-                                                colors[index]
-                                            ? Icon(Icons.done,
-                                                color: context.theme.colorScheme
-                                                    .secondary)
-                                            : Container(),
-                                      ),
-                                    ),
-                                  ),
-                                  Text(themes[index],
-                                      style: context.theme.textTheme.bodyLarge)
-                                ],
-                              ),
-                            ],
-                          );
-                        },
-                      ),
                     ),
                   ),
                 ),

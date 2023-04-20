@@ -11,6 +11,7 @@ class Adhelper extends GetxController {
 
   InterstitialAd? rewarded;
   BannerAd? bannerad;
+  bool test = true;
 
   @override
   void onInit() {
@@ -25,7 +26,9 @@ class Adhelper extends GetxController {
     }
     return BannerAd(
         size: Get.width <= 468 ? AdSize.banner : AdSize.fullBanner,
-        adUnitId: "ca-app-pub-3940256099942544/6300978111",
+        adUnitId: test == true
+            ? "ca-app-pub-3940256099942544/6300978111"
+            : "ca-app-pub-6574668057036090/8234869549",
         // ca-app-pub-3940256099942544/6300978111    test
         // ca-app-pub-6574668057036090/8234869549    real
         listener: BannerAdListener(onAdLoaded: (ad) {
@@ -45,7 +48,9 @@ class Adhelper extends GetxController {
   getInterstitialad() {
     if (Platform.isAndroid) {
       InterstitialAd.load(
-        adUnitId: "ca-app-pub-3940256099942544/1033173712",
+        adUnitId: test == true
+            ? "ca-app-pub-3940256099942544/1033173712"
+            : "ca-app-pub-6574668057036090/8762355294",
         //ca-app-pub-3940256099942544/1033173712     test
         //ca-app-pub-6574668057036090/8762355294     real
         request: const AdRequest(),
@@ -65,19 +70,26 @@ class Adhelper extends GetxController {
   }
 
   showInterstitialad(Story story, Chapter chapter) {
-    videoisready
-        ? rewarded!.fullScreenContentCallback = FullScreenContentCallback(
-            onAdDismissedFullScreenContent: (ad) {
-              Get.toNamed("/chapter", arguments: {
-                "chapter": chapter,
-                "story": story,
-              });
-              rewarded!.dispose();
-              getInterstitialad();
-            },
-          )
-        : null;
-    rewarded!.show();
+    if (videoisready) {
+      rewarded!.fullScreenContentCallback = FullScreenContentCallback(
+        onAdDismissedFullScreenContent: (ad) {
+          Get.toNamed("/chapter", arguments: {
+            "chapter": chapter,
+            "story": story,
+          });
+          rewarded!.dispose();
+          videoisready = false;
+          getInterstitialad();
+        },
+      );
+      rewarded!.show();
+    }
+    else {
+      Get.toNamed("/chapter", arguments: {
+        "chapter": chapter,
+        "story": story,
+      });
+    }
   }
 
   getappopenad() async {

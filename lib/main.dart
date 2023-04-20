@@ -36,7 +36,7 @@ void main() async {
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-
+  
   showOnBoarding = sharedpref?.getBool("firstopen") ?? true;
 
   runApp(const MyApp());
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   static FirebaseAnalyticsObserver observer =
       FirebaseAnalyticsObserver(analytics: analytics);
-
+  
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
