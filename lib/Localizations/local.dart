@@ -64,6 +64,7 @@ class MyLocale implements Translations {
           "assets/images/framedimage.jpg": "اطار",
           "assets/images/flower.jpg": "زهور",
           "Show Background Image": "اظهر الخلفية",
+          "search result": "نتائج البحث",
         },
       };
 }

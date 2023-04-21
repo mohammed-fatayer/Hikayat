@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
     LocaleController controller = Get.put(LocaleController());
     String? theme = sharedpref!.getString("theme");
     return GetMaterialApp(
-      navigatorObservers: <NavigatorObserver>[observer],
+      // navigatorObservers: <NavigatorObserver>[observer],
       debugShowCheckedModeBanner: false,
       title: 'Hikayat',
       locale: controller.initlanguage,

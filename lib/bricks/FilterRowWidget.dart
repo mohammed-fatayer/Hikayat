@@ -26,7 +26,7 @@ class FilterRowWidget extends StatelessWidget {
                 onTap: () {
                   //show getx dialog that shows all the stories with this filter and then navigate to that story
                   Get.defaultDialog(
-                    title: "Filter",
+                    title: "search result".tr,
                     content: Expanded(child: FilterStorySlider(filter: filter)),
                     textConfirm: "Ok",
                     confirmTextColor: Colors.white,
@@ -36,7 +36,7 @@ class FilterRowWidget extends StatelessWidget {
                   );
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 4,),
                   child: Text(filter,
                       style: Get.theme.textTheme.bodyMedium!.copyWith(
                         color: Get.theme.colorScheme.secondary,
