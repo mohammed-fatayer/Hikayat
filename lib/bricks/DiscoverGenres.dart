@@ -48,16 +48,26 @@ class DiscoverGenres extends StatelessWidget {
                               Get.toNamed('/genre',
                                   arguments: dataController.categories[index]);
                             },
-                            child: Hero(
-                              tag: controller.categories[index].title,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: CachedNetworkImage(
-                                  imageUrl:
-                                      dataController.categories[index].imageUrl,
-                                  fit: BoxFit.cover,
-                                  placeholder: (context, url) =>
-                                      Image.asset("assets/images/loading.gif"),
+                            child: Card(
+                              color: Get.theme.primaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                side: BorderSide(
+                                    color: Get.theme.colorScheme.secondary,
+                                    width: 2),
+                              ),
+                              elevation: 5,
+                              child: Hero(
+                                tag: controller.categories[index].title,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: CachedNetworkImage(
+                                    imageUrl: dataController
+                                        .categories[index].imageUrl,
+                                    fit: BoxFit.cover,
+                                    placeholder: (context, url) => Image.asset(
+                                        "assets/images/loading.gif"),
+                                  ),
                                 ),
                               ),
                             ),

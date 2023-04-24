@@ -1,4 +1,4 @@
-package com.hikayat.hayat.name
+package com.rewiatworld
 
 import io.flutter.embedding.android.FlutterActivity
 

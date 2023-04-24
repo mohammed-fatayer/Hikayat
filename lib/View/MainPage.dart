@@ -37,7 +37,7 @@ class MainPage extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          'Hikayat'.tr,
+          'rewiat'.tr,
           style: context.theme.textTheme.headlineSmall,
         ),
         backgroundColor: context.theme.primaryColor,

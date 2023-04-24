@@ -48,6 +48,42 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192158253933:android:9dd9652e26359b86749064",
+        "android_client_info": {
+          "package_name": "com.rewiatworld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "192158253933-1o9cc2cpjidp1i7ukv5jp2gb5c72fn4c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdJD5MJewwk8oRoRjwK88_ybz_IuHLhgs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "192158253933-1o9cc2cpjidp1i7ukv5jp2gb5c72fn4c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "192158253933-geucqqdott46g2o3sodmate7dq5p2j8n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hikayatWeb"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

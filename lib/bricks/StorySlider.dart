@@ -41,67 +41,75 @@ class _StorySliderState extends State<StorySlider> {
                 child: sotredStories.isEmpty
                     ? const Center(child: CircularProgressIndicator())
                     : ListView.builder(
-                        controller:mainController.MainPageLatestSliderScrollController ,
+                        controller:
+                            mainController.MainPageLatestSliderScrollController,
                         physics: const BouncingScrollPhysics(),
-                        itemCount: sotredStories.length+1,
+                        itemCount: sotredStories.length + 1,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (BuildContext context, int index) {
                           if (index == sotredStories.length) {
-                            if (controller.isloadingmoreForMainDateSlider == false) {
+                            if (controller.isloadingmoreForMainDateSlider ==
+                                false) {
                               return const Center(child: SizedBox());
                             }
                             return const Center(
                                 child: CircularProgressIndicator());
-                          }
-                          else{
+                          } else {
                             return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(
-                              onTap: () {
-                                Get.toNamed("/story",
-                                    arguments: sotredStories[index]);
-                              },
-                              child: Hero(
-                                tag: sotredStories[index].imageUrl,
-                                child: SizedBox(
-                                  width: 100,
-                                  child: Column(
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: CachedNetworkImage(
-                                              imageUrl:
-                                                  sotredStories[index].imageUrl,
-                                              placeholder: (context, url) =>
-                                                  Image.asset(
-                                                "assets/images/loading.gif",
-                                                fit: BoxFit.cover,
-                                              ),
-                                              fit: BoxFit.cover,
-                                            )),
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                onTap: () {
+                                  Get.toNamed("/story",
+                                      arguments: sotredStories[index]);
+                                },
+                                child: Card(
+                                  color: Get.theme.primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    side: BorderSide(
+                                        color: Get.theme.colorScheme.secondary,
+                                        width: 2),
+                                  ),
+                                  elevation: 5,
+                                  child: Hero(
+                                    tag: sotredStories[index].imageUrl,
+                                    child: SizedBox(
+                                      width: 100,
+                                      child: Column(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: CachedNetworkImage(
+                                                  imageUrl: sotredStories[index]
+                                                      .imageUrl,
+                                                  placeholder: (context, url) =>
+                                                      Image.asset(
+                                                    "assets/images/loading.gif",
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                  fit: BoxFit.cover,
+                                                )),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              sotredStories[index].title,
+                                              style: context
+                                                  .theme.textTheme.bodyLarge,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          sotredStories[index].title,
-                                          style:
-                                              context.theme.textTheme.bodyLarge,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      )
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          );
-                        }
-                         
-                            
+                            );
                           }
-                      ),
+                        }),
               ),
             ],
           );

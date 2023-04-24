@@ -69,7 +69,6 @@ class GenrePage extends StatelessWidget {
                                 0.75
                               ])),
                     ),
-                    
                   ],
                 ),
               ),
@@ -114,7 +113,8 @@ class GenrePage extends StatelessWidget {
                             child: Column(
                               children: <Widget>[
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 120.0),
+                                  padding: const EdgeInsets.only(
+                                      left: 120.0, top: 80),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(
@@ -170,7 +170,7 @@ class GenrePage extends StatelessWidget {
                                           children: <Widget>[
                                             Padding(
                                               padding: const EdgeInsets.only(
-                                                  right:20.0),
+                                                  right: 20.0),
                                               child: Text(
                                                 'Stories'.tr,
                                                 style: Get
@@ -179,7 +179,9 @@ class GenrePage extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                        ParticularGenreStories(category: category,)
+                                        ParticularGenreStories(
+                                          category: category,
+                                        )
                                       ],
                                     ),
                                   ),
@@ -194,11 +196,11 @@ class GenrePage extends StatelessWidget {
                         left: 40,
                         child: Hero(
                           tag: category.title,
-                          child: SizedBox(
-                            width: 100,
-                            height: 150,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: SizedBox(
+                              width: 200,
+                              height: 150,
                               child: FadeInImage(
                                 image: NetworkImage(category.imageUrl),
                                 fit: BoxFit.cover,

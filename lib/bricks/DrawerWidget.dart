@@ -11,13 +11,9 @@ class DrawerWidget extends StatelessWidget {
   FirebaseLogEventController firebaseLogEventController = Get.find();
 
   final String _fontFamily = 'Amiri';
-  final List<Color> colors = [
-    Colors.white,
-    const Color(0xff242248),
-    Colors.black
-  ];
-  final List<Color> borders = [Colors.black, Colors.white, Colors.white];
-  final List<String> themes = ['Light', 'Dark', 'Amoled'];
+  final List<Color> colors = [Colors.white, Colors.black];
+  final List<Color> borders = [Colors.black, Colors.white];
+  final List<String> themes = ['Light'.tr, 'Amoled'.tr];
 
   DrawerWidget({super.key});
 
@@ -219,7 +215,9 @@ class DrawerWidget extends StatelessWidget {
                                 onChanged: (value) {
                                   controller.changeBackgroundImage(value!);
                                 }),
-                            const Divider(height: 2, ),
+                            const Divider(
+                              height: 2,
+                            ),
                             ListTile(
                               title: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -236,7 +234,7 @@ class DrawerWidget extends StatelessWidget {
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     shrinkWrap: true,
-                                    itemCount: 3,
+                                    itemCount: 2,
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return Stack(
@@ -282,17 +280,8 @@ class DrawerWidget extends StatelessWidget {
                                                             .changeTextTheme();
                                                         controller.update();
                                                         break;
-                                                      case 1:
-                                                        Get.changeTheme(Themes
-                                                            .customPurpleTheme);
 
-                                                        sharedpref!.setString(
-                                                            "theme", "purple");
-                                                        controller
-                                                            .changeTextTheme();
-                                                        controller.update();
-                                                        break;
-                                                      case 2:
+                                                      case 1:
                                                         Get.changeTheme(Themes
                                                             .customDarkTheme);
 

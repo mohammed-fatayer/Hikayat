@@ -36,7 +36,7 @@ void main() async {
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-  
+
   showOnBoarding = sharedpref?.getBool("firstopen") ?? true;
 
   runApp(const MyApp());
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   static FirebaseAnalyticsObserver observer =
       FirebaseAnalyticsObserver(analytics: analytics);
-  
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -62,11 +62,7 @@ class MyApp extends StatelessWidget {
 
       translations: MyLocale(),
       binds: MyBinding().dependencies(),
-      theme: theme == "purple"
-          ? Themes.customPurpleTheme
-          : theme == "dark"
-              ? Themes.customDarkTheme
-              : Themes.customLightTheme,
+      theme: theme == "dark" ? Themes.customDarkTheme : Themes.customLightTheme,
       // initialRoute: showOnBoarding ? "/onboarding" : "/",
       builder: (context, child) => BaseWidget(child: child!),
       getPages: [

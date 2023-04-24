@@ -58,6 +58,7 @@ class MyLocale implements Translations {
           "About us": "من نحن",
           "Telegram": "تيليجرام",
           "assets/images/cool.jpg": "زخرفة",
+          "rewiat": "روايات",
           "assets/images/paper.jpg": "ورق",
           "assets/images/rain.jpg": "مطر",
           "assets/images/greypaper.jpg": "ورق رمادي",
@@ -65,6 +66,8 @@ class MyLocale implements Translations {
           "assets/images/flower.jpg": "زهور",
           "Show Background Image": "اظهر الخلفية",
           "search result": "نتائج البحث",
+          "Light": "فاتح",
+          "Amoled": "داكن",
         },
       };
 }
